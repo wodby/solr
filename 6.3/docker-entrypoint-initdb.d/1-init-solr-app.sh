@@ -1,6 +1,10 @@
 #!/bin/bash
 
-set -ex
+set -e
+
+if [[ ! -z $DEBUG ]]; then
+  set -x
+fi
 
 sudo /opt/docker-solr/scripts/solr-fix-permissions
 

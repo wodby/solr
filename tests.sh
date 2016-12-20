@@ -9,14 +9,21 @@ fi
 name=${NAME:-solr}
 host=${HOST:-localhost}
 port=${PORT:-8983}
+started=0
 
 for i in {30..0}; do
     if docker exec "$name" curl -s "http://$host:$port"; then
+        started=1
         break
     fi
-    echo 'Solr starting process in progress...'
+    echo 'Solr starting...'
     sleep 1
 done
+
+if [[ "$started" -eq '0' ]]; then
+    echo >&2 'Error. Solr is unreachable.'
+    exit 1
+fi
 
 echo 'Solr has started!'
 

@@ -2,6 +2,10 @@
 
 set -e
 
+if [[ ! -z $DEBUG ]]; then
+  set -x
+fi
+
 core=$1
 
 if [[ -z "$core" ]]; then

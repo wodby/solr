@@ -2,6 +2,10 @@
 
 set -e
 
+if [[ ! -z $DEBUG ]]; then
+  set -x
+fi
+
 core=$1
 schema=$2
 
@@ -15,11 +19,11 @@ mkdir -p /tmp/schema
 cd /tmp/schema
 
 if [[ "$schema" = 'drupal8' ]]; then
-    wget https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.0-beta1.tar.gz
+    wget -nv https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.0-beta1.tar.gz
     tar xzf search_api_solr*
     solr create_core -c "$core" -d ./search_api_solr/solr-conf/6.x/
 elif [[ "$schema" = 'drupal7' ]]; then
-    wget https://ftp.drupal.org/files/projects/search_api_solr-7.x-1.11.tar.gz
+    wget -nv https://ftp.drupal.org/files/projects/search_api_solr-7.x-1.11.tar.gz
     tar xzf search_api_solr*
     solr create_core -c "$core" -d ./search_api_solr/solr-conf/6.x/
 else
