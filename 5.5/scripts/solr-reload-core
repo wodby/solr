@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+core=$1
+
+if [[ -z "$core" ]]; then
+    echo >&2 'Error. Core name have to be defined'
+    exit 1
+fi
+
+curl "http://localhost:8983/solr/admin/cores?action=RELOAD&core=$core"
+echo 'Done!'

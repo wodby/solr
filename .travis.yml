@@ -1,0 +1,41 @@
+language: python
+
+sudo: required
+
+services:
+  - docker
+
+env:
+  global:
+    - REPO=wodby/solr
+    - COMMIT=${TRAVIS_COMMIT::8}
+  matrix:
+    - SOLR_VER=5.5
+    - SOLR_VER=6.3
+
+install:
+  - docker build -t $REPO:$COMMIT ./$SOLR_VER/.
+  - docker run -d --name=solr $REPO:$COMMIT
+
+script:
+  - docker ps | grep -q "$REPO:$COMMIT"
+
+after_success: |
+  if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([ "$TRAVIS_BRANCH" == "master" ] || [ -n "$TRAVIS_TAG" ]); then
+    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    docker tag $REPO:$COMMIT $REPO:$SOLR_VER
+
+    if [ -n "$TRAVIS_TAG" ]; then
+      docker tag $REPO:$COMMIT $REPO:$SOLR_VER-$TRAVIS_TAG;
+    fi
+
+    if [ "$SOLR_VER" == "6.3" ]; then
+      docker tag $REPO:$COMMIT $REPO:latest;
+    fi
+
+    docker rmi $REPO:$COMMIT
+    docker push $REPO
+  fi
+
+after_failure:
+  - docker logs php

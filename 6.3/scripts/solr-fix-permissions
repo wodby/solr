@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+mkdir -p /opt/solr/server/solr
+chown solr:solr /opt/solr/server/solr

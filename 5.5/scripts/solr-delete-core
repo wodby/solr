@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+core=$1
+
+if [[ -z "$core" ]]; then
+    echo >&2 'Error. Core name have to be defined'
+    exit 1
+fi
+
+solr delete -c "$core"
+echo 'Done!'
