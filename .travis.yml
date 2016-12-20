@@ -19,6 +19,7 @@ install:
 
 script:
   - docker ps | grep -q "$REPO:$COMMIT"
+  - docker exec solr solr -v | grep -q "$SOLR_VER"
   - ./tests.sh
 
 after_success: |
