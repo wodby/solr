@@ -23,7 +23,7 @@ elif [[ "$schema" = 'drupal7' ]]; then
     tar xzf search_api_solr*
     solr create_core -c "$core" -d ./search_api_solr/solr-conf/5.x/
 else
-    echo "Warning. Unknown schema specified: $schema"
+    echo "Warning. Unknown schema specified: '$schema'"
     solr create_core -c "$core"
 fi
 
