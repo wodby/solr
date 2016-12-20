@@ -11,7 +11,7 @@ host=${HOST:-localhost}
 port=${PORT:-8983}
 
 for i in {30..0}; do
-    if curl -s "http://$host:$port"; then
+    if docker exec "$name" curl -s "http://$host:$port"; then
         break
     fi
     echo 'Solr starting process in progress...'
