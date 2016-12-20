@@ -7,6 +7,18 @@ if [[ ! -z $DEBUG ]]; then
 fi
 
 name=${NAME:-solr}
+host=${HOST:-localhost}
+port=${PORT:-8983}
+
+for i in {30..0}; do
+    if curl -s "http://$host:$port"; then
+        break
+    fi
+    echo 'Solr starting process in progress...'
+    sleep 1
+done
+
+echo 'Solr has started!'
 
 docker exec "$name" solr-create-core core1
 docker exec "$name" solr-create-core core2 drupal7
