@@ -7,36 +7,28 @@ services:
 
 env:
   global:
-    - REPO=wodby/solr
-    - COMMIT=${TRAVIS_COMMIT::8}
+    - LATEST_VERSION=6.4
   matrix:
-    - SOLR_VER=5.5
-    - SOLR_VER=6.3
-
-install:
-  - docker build -t $REPO:$COMMIT ./$SOLR_VER/.
-  - docker run -d --name=solr $REPO:$COMMIT
+    - VERSION=5.5
+    - VERSION=6.3
+    - VERSION=6.4
 
 script:
-  - docker ps | grep -q "$REPO:$COMMIT"
-  - docker exec solr solr -v | grep -q "$SOLR_VER"
-  - ./tests.sh
+  - cd ./$VERSION
+  - make && make test
 
 after_success: |
   if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([ "$TRAVIS_BRANCH" == "master" ] || [ -n "$TRAVIS_TAG" ]); then
     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    docker tag $REPO:$COMMIT $REPO:$SOLR_VER
+    make release
 
     if [ -n "$TRAVIS_TAG" ]; then
-      docker tag $REPO:$COMMIT $REPO:$SOLR_VER-$TRAVIS_TAG;
+      make VERSION="$VERSION-$TRAVIS_TAG" release
     fi
 
-    if [ "$SOLR_VER" == "6.3" ]; then
-      docker tag $REPO:$COMMIT $REPO:latest;
+    if [ "$VERSION" == "$LATEST_VERSION" ]; then
+      make VERSION=latest release
     fi
-
-    docker rmi $REPO:$COMMIT
-    docker push $REPO
   fi
 
 after_failure:

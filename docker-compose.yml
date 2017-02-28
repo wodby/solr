@@ -1,9 +1,0 @@
-version: '2'
-
-services:
-  solr:
-    build: ./6.3
-    ports:
-      - '8983:8983'
-    volumes:
-      - ./docker-runtime/solr:/opt/solr/server/solr
