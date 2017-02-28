@@ -6,13 +6,14 @@ if [[ ! -z $DEBUG ]]; then
   set -x
 fi
 
-host='localhost:8983'
+host='solr'
+port='8983'
 
 waitForSolr() {
     started=0
 
     for i in {30..0}; do
-        if solr curl -s "http://${host}"; then
+        if solr curl -s "http://${host}:${port}"; then
             started=1
             break
         fi
@@ -29,12 +30,18 @@ waitForSolr() {
 }
 
 solr() {
-    docker exec $NAME "$@"
+    docker run --rm -i --link "${NAME}":"${host}" "${IMAGE}" "$@"
 }
 
 waitForSolr
 
-solr make create core=core1
-solr curl -s "http://${host}/solr/core1/admin/ping"
-solr make reload core=core1
-solr make delete core=core1
+echo "Creating new core..."
+solr make core=core1 | grep "200 OK"
+echo "Checking if core has been created..."
+solr make ping core=core1 | grep "200 OK"
+echo "Reloading core..."
+solr make reload core=core1 | grep "200 OK"
+echo "Deleting core..."
+solr make delete core=core1 | grep "200 OK"
+echo "Checking if core has been deleted..."
+solr make ping core=core1 | grep "404 Not Found"

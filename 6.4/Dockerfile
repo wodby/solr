@@ -10,9 +10,11 @@ USER $SOLR_USER
 RUN cp -r /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml \
     && cp -r /opt/solr/server/solr/configsets /opt/docker-solr/configsets
 
-COPY solr-fix-permissions /opt/docker-solr/scripts/
-COPY solr.mk /opt/solr/server/solr/Makefile
+COPY scripts /opt/docker-solr/scripts/
 COPY docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
 
 VOLUME /opt/solr/server/solr
 WORKDIR /opt/solr/server/solr
+
+ENTRYPOINT ["docker-entrypoint-solr.sh"]
+CMD ["solr-foreground"]
