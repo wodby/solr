@@ -38,5 +38,4 @@ logs:
 clean:
 	-docker rm -f $(NAME)
 
-release:
-	build push
+release: build push
