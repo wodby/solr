@@ -1,5 +1,3 @@
--include rewrite.mk
-
 .PHONY: create delete reload ping check-ready check-live
 
 check_defined = \
