@@ -9,3 +9,19 @@
 - [`6.4`, `latest` (*6.4/Dockerfile*)](https://github.com/wodby/solr/tree/master/6.4/Dockerfile)
 - [`6.3` (*6.3/Dockerfile*)](https://github.com/wodby/solr/tree/master/6.3/Dockerfile)
 - [`5.5` (*5.5/Dockerfile*)](https://github.com/wodby/solr/tree/master/5.5/Dockerfile)
+
+## Actions
+
+```bash
+# Create new core1
+docker run --rm -i --link "your-solr-container-name":"solr" "wodby/solr" make core=core1 host=solr port=8983
+
+# Ping core1
+docker run --rm -i --link "your-solr-container-name":"solr" "wodby/solr" make ping core=core1 host=solr port=8983
+
+# Reload core1
+docker run --rm -i --link "your-solr-container-name":"solr" "wodby/solr" make reload core=core1 host=solr port=8983
+
+# Delete core1
+docker run --rm -i --link "your-solr-container-name":"solr" "wodby/solr" make delete core=core1 host=solr port=8983
+```
