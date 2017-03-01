@@ -14,8 +14,6 @@ RUN chown -R solr:solr /opt/docker-solr/scripts
 
 USER $SOLR_USER
 
-RUN touch /opt/docker-solr/scripts/rewrite.mk && touch /opt/docker-solr/scripts/solr.mk
-
 VOLUME /opt/solr/server/solr
 WORKDIR /opt/solr/server/solr
 

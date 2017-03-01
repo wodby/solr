@@ -1,6 +1,6 @@
 -include rewrite.mk
 
-.PHONY: waitsolr create delete reload ping
+.PHONY: create delete reload ping check-ready check-live
 
 check_defined = \
     $(strip $(foreach 1,$1, \
@@ -13,21 +13,28 @@ $(call check_defined, core, host, port)
 
 config_set ?= data_driven_schema_configs
 max_try ?= 12
-wait_seconds ?= 5
+wait_seconds ?= 3
 
 default: create
 
-create: waitsolr
-	curl -sI "http://$(host):$(port)/solr/admin/cores?action=CREATE&name=$(core)&configSet=$(config_set)"
+create:
+	curl -sIN "http://$(host):$(port)/solr/admin/cores?action=CREATE&name=$(core)&configSet=$(config_set)" \
+		| head -n 1 | awk '{print $$2}' | grep 200
 
-delete: waitsolr
-	curl -sI "http://$(host):$(port)/solr/admin/cores?action=UNLOAD&core=$(core)&deleteIndex=true&deleteDataDir=true&deleteInstanceDir=true"
+delete:
+	curl -sIN "http://$(host):$(port)/solr/admin/cores?action=UNLOAD&core=$(core)&deleteIndex=true&deleteDataDir=true&deleteInstanceDir=true" \
+		| head -n 1 | awk '{print $$2}' | grep 200
 
-reload: waitsolr
-	curl -sI "http://$(host):$(port)/solr/admin/cores?action=RELOAD&core=$(core)"
+reload:
+	curl -sIN "http://$(host):$(port)/solr/admin/cores?action=RELOAD&core=$(core)" \
+		| head -n 1 | awk '{print $$2}' | grep 200
 
-ping: waitsolr
-	curl -sI "http://$(host):$(port)/solr/$(core)/admin/ping"
+ping:
+	curl -sIN "http://$(host):$(port)/solr/$(core)/admin/ping" \
+		| head -n 1 | awk '{print $$2}' | grep 200
 
-waitsolr:
+check-ready:
 	/opt/docker-solr/scripts/wait-solr $(host) $(port) $(max_try) $(wait_seconds)
+
+check-live:
+	@echo "OK"
