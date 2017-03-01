@@ -13,7 +13,7 @@ build:
 	docker build -t $(REPO):$(VERSION) ./
 
 test:
-	make VOLUMES="-v /opt/solr/server/solr" start
+	make start
 	NAME=$(NAME) IMAGE=$(REPO):$(VERSION) ./test.sh
 	make clean
 

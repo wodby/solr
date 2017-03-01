@@ -9,9 +9,12 @@ RUN apk add --no-cache sudo curl make && \
 RUN mv /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml && \
     mv /opt/solr/server/solr/configsets /opt/docker-solr/configsets
 
+COPY scripts /opt/docker-solr/scripts/
+RUN chown -R solr:solr /opt/docker-solr/scripts
+
 USER $SOLR_USER
 
-COPY scripts /opt/docker-solr/scripts/
+RUN touch /opt/docker-solr/scripts/rewrite.mk && touch /opt/docker-solr/scripts/solr.mk
 
 VOLUME /opt/solr/server/solr
 WORKDIR /opt/solr/server/solr

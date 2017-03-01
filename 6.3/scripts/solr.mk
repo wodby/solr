@@ -1,3 +1,5 @@
+-include rewrite.mk
+
 host ?= solr
 port ?= 8983
 config_set ?= data_driven_schema_configs
