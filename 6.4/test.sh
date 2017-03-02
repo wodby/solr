@@ -15,7 +15,7 @@ solr() {
 }
 
 echo "Checking solr readiness..."
-solr make check-ready core=$CORE host=$HOST port=$PORT
+solr make check-ready host=$HOST port=$PORT
 echo "Creating new core..."
 solr make core=$CORE host=$HOST port=$PORT
 echo "Checking if core has been created..."

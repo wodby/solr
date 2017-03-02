@@ -21,7 +21,5 @@ sed -i 's@^SOLR_HEAP=".*"@'"SOLR_HEAP=${SOLR_HEAP}"'@' /opt/solr/bin/solr.in.sh
 if [[ "${1}" == 'make' ]]; then
     exec "$@" -f /opt/docker-solr/scripts/Makefile
 else
-    exec "$@"
+    exec docker-entrypoint.sh "$@"
 fi
-
-exec docker-entrypoint.sh "$@"
