@@ -10,7 +10,9 @@ RUN mv /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml && \
     mv /opt/solr/server/solr/configsets /opt/docker-solr/configsets
 
 COPY scripts /opt/docker-solr/scripts/
-RUN chown -R solr:solr /opt/docker-solr/scripts
+COPY actions.mk /usr/local/bin
+
+RUN chown -R solr:solr /opt/docker-solr/scripts && chown solr:solr /usr/local/bin/actions.mk
 
 USER $SOLR_USER
 
