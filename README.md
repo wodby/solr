@@ -1,10 +1,10 @@
 # Generic Apache Solr docker image
 
-[![Wodby Slack](https://www.google.com/s2/favicons?domain=www.slack.com) Join us on Slack](https://slack.wodby.com/)
-
 [![Build Status](https://travis-ci.org/wodby/solr.svg?branch=master)](https://travis-ci.org/wodby/solr)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
+
+[![Wodby Slack](https://www.google.com/s2/favicons?domain=www.slack.com) Join us on Slack](https://slack.wodby.com/)
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -53,4 +53,4 @@ docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make delet
 
 ## Using in Production
 
-Deploy Solr to your own server for free via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
+Deploy Solr to your own server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
