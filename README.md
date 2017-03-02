@@ -53,4 +53,4 @@ docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make delet
 
 ## Using in Production
 
-Deploy Solr to your own server for free via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
+Deploy Solr to your own server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
