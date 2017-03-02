@@ -7,8 +7,8 @@ __check_defined = \
     $(if $(value $1),, \
       $(error Required parameter is missing: $1$(if $2, ($2))))
 
-$(call check_defined, host, port)
-
+host ?= localhost
+port ?= 8983
 config_set ?= data_driven_schema_configs
 max_try ?= 12
 wait_seconds ?= 3

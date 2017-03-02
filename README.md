@@ -12,16 +12,46 @@
 
 ## Actions
 
+Usage:
+```
+make COMMAND [host=localhost] [port=8983] [params ...]
+
+commands:
+    create (default)
+    ping
+    reload
+    delete
+    check-ready
+```
+
+Examples:
+
 ```bash
 # Create new core1
-docker run --rm -i --link "your-solr-container-name":"solr" "wodby/solr" make core=core1 host=solr port=8983
+docker exec -ti [ID] make core=core1 -f /opt/docker-solr/scripts/Makefile
 
 # Ping core1
-docker run --rm -i --link "your-solr-container-name":"solr" "wodby/solr" make ping core=core1 host=solr port=8983
+docker exec -ti [ID] make ping core=core1 -f /opt/docker-solr/scripts/Makefile
 
 # Reload core1
-docker run --rm -i --link "your-solr-container-name":"solr" "wodby/solr" make reload core=core1 host=solr port=8983
+docker exec -ti [ID] make reload core=core1 -f /opt/docker-solr/scripts/Makefile
 
 # Delete core1
-docker run --rm -i --link "your-solr-container-name":"solr" "wodby/solr" make delete core=core1 host=solr port=8983
+docker exec -ti [ID] make delete core=core1 -f /opt/docker-solr/scripts/Makefile
+```
+
+Contacting remote solr:
+
+```bash
+# Create new core1
+docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make core=core1 host=solr port=8983
+
+# Ping core1
+docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make ping core=core1 host=solr port=8983
+
+# Reload core1
+docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make reload core=core1 host=solr port=8983
+
+# Delete core1
+docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make delete core=core1 host=solr port=8983
 ```

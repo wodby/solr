@@ -16,13 +16,14 @@ solr() {
 
 echo "Checking solr readiness..."
 solr make check-ready host=$HOST port=$PORT
+# Skip port, default value is the same
 echo "Creating new core..."
-solr make core=$CORE host=$HOST port=$PORT
+solr make core=$CORE host=$HOST
 echo "Checking if core has been created..."
-solr make ping core=$CORE host=$HOST port=$PORT
+solr make ping core=$CORE host=$HOST
 echo "Reloading core..."
-solr make reload core=$CORE host=$HOST port=$PORT
+solr make reload core=$CORE host=$HOST
 echo "Deleting core..."
-solr make delete core=$CORE host=$HOST port=$PORT
+solr make delete core=$CORE host=$HOST
 echo "Checking if core has been deleted..."
 solr bash -c "curl -sIN 'http://$HOST:$PORT/solr/$CORE/admin/ping' | head -n 1 | awk '{print \$2}' | grep 404"
