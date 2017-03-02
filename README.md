@@ -1,5 +1,7 @@
 # Generic Apache Solr docker image
 
+[![Wodby Slack](https://www.google.com/s2/favicons?domain=www.slack.com) Join us on Slack](https://slack.wodby.com/)
+
 [![Build Status](https://travis-ci.org/wodby/solr.svg?branch=master)](https://travis-ci.org/wodby/solr)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
@@ -43,15 +45,12 @@ docker exec -ti [ID] make delete core=core1 -f /opt/docker-solr/scripts/Makefile
 Contacting remote solr:
 
 ```bash
-# Create new core1
 docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make core=core1 host=solr port=8983
-
-# Ping core1
 docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make ping core=core1 host=solr port=8983
-
-# Reload core1
 docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make reload core=core1 host=solr port=8983
-
-# Delete core1
 docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make delete core=core1 host=solr port=8983
 ```
+
+## Using in Production
+
+Deploy Solr to your own server for free via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
