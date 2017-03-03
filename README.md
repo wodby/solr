@@ -16,15 +16,20 @@
 
 Usage:
 ```
-make COMMAND [host=localhost] [port=8983] [params ...]
+make COMMAND [params ...]
 
 commands:
-    create (default)
-    ping
-    reload
-    delete
-    check-ready
-    check-live
+    create (default) core=<core-name> [host=<solr> config_set=<config_set>] 
+    ping core=<core-name> [host=<solr>]
+    reload core=<core-name> [host=<solr>]
+    delete core=<core-name> [host=<solr>]
+    check-ready [host=<solr> max_try=<10> wait_seconds=<5>]
+
+default params values:
+    host localhost
+    config_set data_driven_schema_configs
+    max_try 12
+    wait_seconds 5
 ```
 
 Examples:
@@ -45,6 +50,8 @@ docker exec -ti [ID] make reload core=core1 -f /usr/local/bin/Makefile
 # Delete core1
 docker exec -ti [ID] make delete core=core1 -f /usr/local/bin/Makefile
 ```
+
+You can skip -f option if you use run instead of exec.
 
 ## Using in Production
 
