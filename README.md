@@ -24,33 +24,28 @@ commands:
     reload
     delete
     check-ready
+    check-live
 ```
 
 Examples:
 
 ```bash
+# Check if Solr is ready
+docker exec -ti [ID] make check-ready -f /usr/local/bin/Makefile
+
 # Create new core1
-docker exec -ti [ID] make core=core1 -f /opt/docker-solr/scripts/Makefile
+docker exec -ti [ID] make core=core1 -f /usr/local/bin/Makefile
 
 # Ping core1
-docker exec -ti [ID] make ping core=core1 -f /opt/docker-solr/scripts/Makefile
+docker exec -ti [ID] make ping core=core1 -f /usr/local/bin/Makefile
 
 # Reload core1
-docker exec -ti [ID] make reload core=core1 -f /opt/docker-solr/scripts/Makefile
+docker exec -ti [ID] make reload core=core1 -f /usr/local/bin/Makefile
 
 # Delete core1
-docker exec -ti [ID] make delete core=core1 -f /opt/docker-solr/scripts/Makefile
-```
-
-Contacting remote solr:
-
-```bash
-docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make core=core1 host=solr port=8983
-docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make ping core=core1 host=solr port=8983
-docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make reload core=core1 host=solr port=8983
-docker run --rm --link "your-solr-container-name":"solr" "wodby/solr" make delete core=core1 host=solr port=8983
+docker exec -ti [ID] make delete core=core1 -f /usr/local/bin/Makefile
 ```
 
 ## Using in Production
 
-Deploy Solr to your own server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
+Deploy Apache Solr to your own server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
