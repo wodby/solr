@@ -24,7 +24,7 @@ commands:
     reload core=<core-name> [host=<solr>]
     delete core=<core-name> [host=<solr>]
     check-ready [host=<solr> max_try=<10> wait_seconds=<5>]
-
+ 
 default params values:
     host localhost
     config_set data_driven_schema_configs
