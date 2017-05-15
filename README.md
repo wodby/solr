@@ -36,19 +36,19 @@ Examples:
 
 ```bash
 # Check if Solr is ready
-docker exec -ti [ID] make check-ready -f /usr/local/bin/Makefile
+docker exec -ti [ID] make check-ready -f /usr/local/bin/actions.mk
 
 # Create new core1
-docker exec -ti [ID] make core=core1 -f /usr/local/bin/Makefile
+docker exec -ti [ID] make core=core1 -f /usr/local/bin/actions.mk
 
 # Ping core1
-docker exec -ti [ID] make ping core=core1 -f /usr/local/bin/Makefile
+docker exec -ti [ID] make ping core=core1 -f /usr/local/bin/actions.mk
 
 # Reload core1
-docker exec -ti [ID] make reload core=core1 -f /usr/local/bin/Makefile
+docker exec -ti [ID] make reload core=core1 -f /usr/local/bin/actions.mk
 
 # Delete core1
-docker exec -ti [ID] make delete core=core1 -f /usr/local/bin/Makefile
+docker exec -ti [ID] make delete core=core1 -f /usr/local/bin/actions.mk
 ```
 
 You can skip -f option if you use run instead of exec.
