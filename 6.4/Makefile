@@ -13,9 +13,7 @@ build:
 	docker build -t $(REPO):$(VERSION) ./
 
 test:
-	make start
 	NAME=$(NAME) IMAGE=$(REPO):$(VERSION) ./test.sh
-	make clean
 
 push:
 	docker push $(REPO):$(VERSION)

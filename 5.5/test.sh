@@ -9,6 +9,11 @@ fi
 host="solr"
 core="core1"
 
+cid="$(
+	docker run -d --name "${NAME}" "${IMAGE}"
+)"
+trap "docker rm -vf ${cid} > /dev/null" EXIT
+
 solr() {
     docker run --rm -i --link "${NAME}":"${host}" "${IMAGE}" "$@"
 }
