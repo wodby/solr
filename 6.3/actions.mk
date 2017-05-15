@@ -8,35 +8,34 @@ __check_defined = \
       $(error Required parameter is missing: $1$(if $2, ($2))))
 
 host ?= localhost
-port ?= 8983
 config_set ?= data_driven_schema_configs
-max_try ?= 12
-wait_seconds ?= 3
+max_try ?= 1
+wait_seconds ?= 1
 
 default: create
 
 create:
 	$(call check_defined, core)
-	curl -sIN "http://$(host):$(port)/solr/admin/cores?action=CREATE&name=$(core)&configSet=$(config_set)" \
+	curl -sIN "http://$(host):8983/solr/admin/cores?action=CREATE&name=$(core)&configSet=$(config_set)" \
 		| head -n 1 | awk '{print $$2}' | grep 200
 
 delete:
 	$(call check_defined, core)
-	curl -sIN "http://$(host):$(port)/solr/admin/cores?action=UNLOAD&core=$(core)&deleteIndex=true&deleteDataDir=true&deleteInstanceDir=true" \
+	curl -sIN "http://$(host):8983/solr/admin/cores?action=UNLOAD&core=$(core)&deleteIndex=true&deleteDataDir=true&deleteInstanceDir=true" \
 		| head -n 1 | awk '{print $$2}' | grep 200
 
 reload:
 	$(call check_defined, core)
-	curl -sIN "http://$(host):$(port)/solr/admin/cores?action=RELOAD&core=$(core)" \
+	curl -sIN "http://$(host):8983/solr/admin/cores?action=RELOAD&core=$(core)" \
 		| head -n 1 | awk '{print $$2}' | grep 200
 
 ping:
 	$(call check_defined, core)
-	curl -sIN "http://$(host):$(port)/solr/$(core)/admin/ping" \
+	curl -sIN "http://$(host):8983/solr/$(core)/admin/ping" \
 		| head -n 1 | awk '{print $$2}' | grep 200
 
 check-ready:
-	/opt/docker-solr/scripts/wait-solr $(host) $(port) $(max_try) $(wait_seconds)
+	/opt/docker-solr/scripts/wait-solr $(host) $(max_try) $(wait_seconds)
 
 check-live:
 	@echo "OK"

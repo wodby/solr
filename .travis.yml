@@ -9,6 +9,7 @@ env:
   global:
     - LATEST_VERSION=6.4
   matrix:
+    - VERSION=5.4
     - VERSION=5.5
     - VERSION=6.3
     - VERSION=6.4

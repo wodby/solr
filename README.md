@@ -1,4 +1,4 @@
-# Generic Apache Solr docker image
+# Generic Apache Solr docker container image
 
 [![Build Status](https://travis-ci.org/wodby/solr.svg?branch=master)](https://travis-ci.org/wodby/solr)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
@@ -11,6 +11,7 @@
 - [`6.4`, `latest` (*6.4/Dockerfile*)](https://github.com/wodby/solr/tree/master/6.4/Dockerfile)
 - [`6.3` (*6.3/Dockerfile*)](https://github.com/wodby/solr/tree/master/6.3/Dockerfile)
 - [`5.5` (*5.5/Dockerfile*)](https://github.com/wodby/solr/tree/master/5.5/Dockerfile)
+- [`5.4` (*5.4/Dockerfile*)](https://github.com/wodby/solr/tree/master/5.4/Dockerfile)
 
 ## Actions
 

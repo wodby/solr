@@ -9,8 +9,8 @@ __check_defined = \
 
 host ?= localhost
 config_set ?= data_driven_schema_configs
-max_try ?= 12
-wait_seconds ?= 3
+max_try ?= 1
+wait_seconds ?= 1
 
 default: create
 
