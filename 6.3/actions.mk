@@ -11,6 +11,7 @@ host ?= localhost
 config_set ?= data_driven_schema_configs
 max_try ?= 1
 wait_seconds ?= 1
+delay_seconds ?= 1
 
 default: create
 
@@ -35,7 +36,7 @@ ping:
 		| head -n 1 | awk '{print $$2}' | grep 200
 
 check-ready:
-	/opt/docker-solr/scripts/wait-solr $(host) $(max_try) $(wait_seconds)
+	/opt/docker-solr/scripts/wait-solr $(host) $(max_try) $(wait_seconds) $(delay_seconds)
 
 check-live:
 	@echo "OK"

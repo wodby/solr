@@ -3,7 +3,7 @@
 set -e
 
 if [[ ! -z "${DEBUG}" ]]; then
-  set -x
+    set -x
 fi
 
 host="solr"
@@ -19,7 +19,7 @@ solr() {
 }
 
 echo "Checking solr readiness..."
-solr make check-ready host="${host}" max_try=12 wait_seconds=3
+solr make check-ready host="${host}" max_try=25 delay_seconds=5
 echo "Creating new core..."
 solr make core="${core}" host="${host}"
 echo "Checking if core has been created..."
