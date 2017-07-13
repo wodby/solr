@@ -1,4 +1,4 @@
-FROM solr:5.5-alpine
+FROM solr:5.5.4-alpine
 
 ENV SOLR_HEAP 1024m
 
