@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+if [[ ! -z "${DEBUG}" ]]; then
+    set -x
+fi
+
+mkdir -p /opt/solr/server/solr
+chown solr:solr /opt/solr/server/solr
