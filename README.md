@@ -16,7 +16,7 @@ For better reliability we release images with stability tags (`wodby/solr:7.1.0-
 
 Supported tags and respective `Dockerfile` links:
 
-* `7`, `7.1`, `7.1.0` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `7`, `7.1`, `7.1.0`, `latest` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
 * `7.0`, `7.0.1` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
 * `6`, `6.6`, `6.6.2` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
 * `6.5`, `6.5.1` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
