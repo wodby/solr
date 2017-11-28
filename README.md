@@ -7,26 +7,31 @@
 
 ## Docker Images
 
-Images are built via [Travis CI](https://travis-ci.org/wodby/solr) and published on [Docker Hub](https://hub.docker.com/r/wodby/solr). 
+* All images are based on Alpine Linux
+* Base image: [solr](https://hub.docker.com/r/_/solr/)
+* [Travis CI builds](https://travis-ci.org/wodby/solr) 
+* [Docker Hub](https://hub.docker.com/r/wodby/solr)
 
-## Versions
+For better reliability we release images with stability tags (`wodby/solr:7.1.0-X.X.X`) which correspond to git tags. We **strongly recommend** using images only with stability tags. Below listed basic tags:
 
-| Solr | Alpine Linux |
-| --- | ------------ |
-| [6.6.0](https://github.com/wodby/solr/tree/master/6.6/Dockerfile) | 3.6 |  
-| [6.5.1](https://github.com/wodby/solr/tree/master/6.5/Dockerfile) | 3.6 |  
-| [6.4.2](https://github.com/wodby/solr/tree/master/6.4/Dockerfile) | 3.6 |  
-| [6.3.0](https://github.com/wodby/solr/tree/master/6.3/Dockerfile) | 3.6 |  
-| [5.5.0](https://github.com/wodby/solr/tree/master/5.5/Dockerfile) | 3.6 |  
-| [5.4.1](https://github.com/wodby/solr/tree/master/5.4/Dockerfile) | 3.6 |  
+Supported tags and respective `Dockerfile` links:
+
+* `7`, `7.1`, `7.1.0` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `7.0`, `7.0.1` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `6`, `6.6`, `6.6.2` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `6.5`, `6.5.1` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `6.4`, `6.4.2` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `6.3`, `6.3.0` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `5`, `5.5`, `5.5.5` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `5.4`, `5.4.1` [Dockerfile](https://github.com/wodby/solr/tree/master/Dockerfile)
 
 ## Environment Variables
 
-| Variable | Default Value |
-| -------- | ------------- | 
-| SOLR_HEAP | 1024m |
+| Variable  | Default Value |
+| --------- | ------------- |
+| SOLR_HEAP | 1024m         |
 
-## Orchestration Actions
+## Orchestration actions
 
 Usage:
 ```
@@ -41,10 +46,10 @@ commands:
  
 default params values:
     host localhost
-    config_set data_driven_schema_configs
+    config_set data_driven_schema_configs (or _default in newer versions)
     max_try 1
     wait_seconds 1
-    delay_seconds 1
+    delay_seconds 0
 ```
 
 ## Deployment

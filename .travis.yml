@@ -1,4 +1,4 @@
-language: python
+language: bash
 
 sudo: required
 
@@ -7,32 +7,42 @@ services:
 
 env:
   global:
-    - LATEST_VERSION=6.6
+    - DOCKER_VERSION=17.06.2
+    - LATEST_VER=7.1
   matrix:
-    - VERSION=5.4
-    - VERSION=5.5
-    - VERSION=6.3
-    - VERSION=6.4
-    - VERSION=6.5
-    - VERSION=6.6
+    - MINOR_VER=7.1 SOLR_VER=7.1.0 MAJOR_VER=7
+    - MINOR_VER=7.0 SOLR_VER=7.0.1
+    - MINOR_VER=6.6 SOLR_VER=6.6.2 MAJOR_VER=6
+    - MINOR_VER=6.5 SOLR_VER=6.5.1
+    - MINOR_VER=6.4 SOLR_VER=6.4.2
+    - MINOR_VER=6.3 SOLR_VER=6.3.0
+    - MINOR_VER=5.5 SOLR_VER=5.5.5 MAJOR_VER=5
+    - MINOR_VER=5.4 SOLR_VER=5.4.1
+
+install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce="${DOCKER_VERSION}~ce-0~ubuntu"
 
 script:
-  - cd ./$VERSION
   - make && make test
 
 after_success: |
-  if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([ "$TRAVIS_BRANCH" == "master" ] || [ -n "$TRAVIS_TAG" ]); then
-    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  if [[ "${TRAVIS_PULL_REQUEST}" == "false" && ("${TRAVIS_BRANCH}" == "master"  || -n "${TRAVIS_TAG}") ]]; then
+    docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
+
     make release
+    make release TAG="${MINOR_VER}"
 
-    if [ -n "$TRAVIS_TAG" ]; then
-      make VERSION="$VERSION-$TRAVIS_TAG" release
-    fi
+    [[ -n "${MAJOR_VER}" ]] && make release TAG="${MAJOR_VER}"
 
-    if [ "$VERSION" == "$LATEST_VERSION" ]; then
-      make VERSION=latest release
+    if [[ -n "${TRAVIS_TAG}" ]]; then
+      make release TAG="${TAG}-${TRAVIS_TAG}"
+    elif [[ "${MINOR_VER}" == "${LATEST_VER}" ]]; then
+      make release TAG="latest"
     fi
   fi
 
-after_failure:
-  - docker logs solr
+notifications:
+  on_failure: never
+  slack:
+    secure: "VBb12Kbc0AC+uMDvvIDh1xKtK/KazPWg/JrEaBuJTmnIiGdBLWech740rqOhqafbp6PnJ52mTWKSEfpXYhYoeJ7fzPsOlbXehj3nnV6nloB/X6eRQwOekqYv2QERec0o9qtXBJcyDQkUp3lDZp16g1tNDM0KOuieuGtFyqs1Vp7LHE7A/9U9viIwgm4IveCg3mvlAu9ApVjiRxlAoLqJsHY33O1YF6S57m7KrLWj5jaM7dRGz/andRezCmzf/vjB5ck7cV6HlcmQEioo41LuVqh+0BSWwlXk4MK+GMXlOVTjzACwpckaZGtQi3V0wcBpuFFbkXrliNja/tDuRkJc0dqT0ZhhapEHvxyYU9y2C3vsRvalVkVWXgOOV2Ac9I+UmIGRMoTJBVrVjTp5xUSnNLU+k6yzVPnFShxBKngJ6m8JKtVq9JZR0icDGOan67mZ5JxCxhnxWZ8Kg56W55AOsVCYwpeTeAA1ObbHY2o2rxB8AVECtbiL3ZCBZeQRbH2Vu00o4TF+/iwQQC5aO47ZB3KluL0sTG/KV8MIJ+M+EzLeKPK3G5mGPKizNUv7zoIYWiKo6JA9Y0mmf1C0JBUdpaoypAhjwXuKlDqdLpy200JBl/KE6KHyabNdt68HXvAP1WS7btnRA8Fc6Sg2LIbDEVbtiHl82+wv/oMZX6OsJy4="
