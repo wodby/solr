@@ -3,6 +3,10 @@
 SOLR_VER ?= 7.1.0
 TAG ?= $(SOLR_VER)
 
+ifneq ($(STABILITY_TAG),)
+    TAG := $(TAG)-$(STABILITY_TAG)
+endif
+
 REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
 

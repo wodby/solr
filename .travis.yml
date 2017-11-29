@@ -36,7 +36,7 @@ after_success: |
     [[ -n "${MAJOR_VER}" ]] && make release TAG="${MAJOR_VER}"
 
     if [[ -n "${TRAVIS_TAG}" ]]; then
-      make release TAG="${TAG}-${TRAVIS_TAG}"
+      make release STABILITY_TAG="${TRAVIS_TAG}"
     elif [[ "${MINOR_VER}" == "${LATEST_VER}" ]]; then
       make release TAG="latest"
     fi
