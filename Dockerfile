@@ -2,6 +2,8 @@ ARG SOLR_VER
 
 FROM solr:${SOLR_VER}-alpine
 
+ARG SOLR_VER
+
 ENV SOLR_HEAP="1024m" \
     SOLR_VER="${SOLR_VER}"
 
