@@ -39,6 +39,7 @@ make COMMAND [params ...]
 
 commands:
     create (default) core [host config_set] 
+    init [host] 
     ping core [host]
     reload core [host]
     delete core [host]
