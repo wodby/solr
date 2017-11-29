@@ -16,14 +16,14 @@ For better reliability we release images with stability tags (`wodby/solr:7.1.0-
 
 Supported tags and respective `Dockerfile` links:
 
-* `7`, `7.1`, `7.1.0`, `latest` [_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `7.0`, `7.0.1` [_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6`, `6.6`, `6.6.2` [_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.5`, `6.5.1` [_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.4`, `6.4.2` [_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.3`, `6.3.0` [_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `5`, `5.5`, `5.5.5` [_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `5.4`, `5.4.1` [_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `7`, `7.1`, `7.1.0`, `latest` ([_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile))
+* `7.0`, `7.0.1` ([_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile))
+* `6`, `6.6`, `6.6.2` ([_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile))
+* `6.5`, `6.5.1` ([_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile))
+* `6.4`, `6.4.2` ([_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile))
+* `6.3`, `6.3.0` ([_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile))
+* `5`, `5.5`, `5.5.5` ([_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile))
+* `5.4`, `5.4.1` ([_Dockerfile_](https://github.com/wodby/solr/tree/master/Dockerfile))
 
 ## Environment Variables
 

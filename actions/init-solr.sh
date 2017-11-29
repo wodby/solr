@@ -12,5 +12,6 @@ host=$1
 cores=$(curl -s "http://${host}:8983/solr/admin/cores?action=STATUS" | { grep -c "instanceDir" || true; })
 
 if [[ "${cores}" == 0 ]]; then
+    echo "No solr cores found, creating a default core"
     make create core="default" host="${host}" -f /usr/local/bin/actions.mk
 fi
