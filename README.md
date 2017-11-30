@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/wodby/solr.svg?branch=master)](https://travis-ci.org/wodby/solr)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
+[![Docker Layers](https://images.microbadger.com/badges/image/wodby/solr.svg)](https://microbadger.com/images/wodby/solr)
 [![Wodby Slack](http://slack.wodby.com/badge.svg)](http://slack.wodby.com)
 
 ## Docker Images
@@ -12,16 +13,18 @@
 * [Travis CI builds](https://travis-ci.org/wodby/solr) 
 * [Docker Hub](https://hub.docker.com/r/wodby/solr)
 
+[_(Dockerfile)_]: https://github.com/wodby/solr/tree/master/Dockerfile
+
 Supported tags and respective `Dockerfile` links:
 
-* `7`, `7.1` `latest` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `7.0` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6`, `6.6` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.5` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.4` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.3` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `5`, `5.5` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `5.4` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `7`, `7.1` `latest` [_(Dockerfile)_]
+* `7.0` [_(Dockerfile)_]
+* `6`, `6.6` [_(Dockerfile)_]
+* `6.5` [_(Dockerfile)_]
+* `6.4` [_(Dockerfile)_]
+* `6.3` [_(Dockerfile)_]
+* `5`, `5.5` [_(Dockerfile)_]
+* `5.4` [_(Dockerfile)_]
 
 For better reliability we additionally release images with stability tags (`wodby/solr:7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We **strongly recommend** using images only with stability tags. 
 
