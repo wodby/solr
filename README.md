@@ -12,18 +12,18 @@
 * [Travis CI builds](https://travis-ci.org/wodby/solr) 
 * [Docker Hub](https://hub.docker.com/r/wodby/solr)
 
-For better reliability we release images with stability tags (`wodby/solr:7.1.0-X.X.X`) which correspond to git tags. We **strongly recommend** using images only with stability tags. Below listed basic tags:
-
 Supported tags and respective `Dockerfile` links:
 
-* `7`, `7.1`, `7.1.0`, `latest` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `7.0`, `7.0.1` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6`, `6.6`, `6.6.2` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.5`, `6.5.1` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.4`, `6.4.2` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `6.3`, `6.3.0` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `5`, `5.5`, `5.5.5` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
-* `5.4`, `5.4.1` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `7`, `7.1` `latest` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `7.0` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `6`, `6.6` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `6.5` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `6.4` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `6.3` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `5`, `5.5` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+* `5.4` [_(Dockerfile)_](https://github.com/wodby/solr/tree/master/Dockerfile)
+
+For better reliability we additionally release images with stability tags (`wodby/solr:7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We **strongly recommend** using images only with stability tags. 
 
 ## Environment Variables
 

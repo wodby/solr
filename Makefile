@@ -3,12 +3,14 @@
 SOLR_VER ?= 7.1.0
 TAG ?= $(SOLR_VER)
 
-ifneq ($(STABILITY_TAG),)
-    override TAG := $(TAG)-$(STABILITY_TAG)
-endif
-
 REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
+
+ifneq ($(STABILITY_TAG),)
+ifneq ($(TAG),latest)
+    override TAG := $(TAG)-$(STABILITY_TAG)
+endif
+endif
 
 .PHONY: build test push shell run start stop logs clean release
 
