@@ -6,7 +6,7 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
-sudo fix-permissions.sh solr solr /opt/solr/server/solr
+sudo init_volumes
 
 if [[ ! -f /opt/solr/server/solr/solr.xml ]]; then
     cp /opt/docker-solr/solr.xml /opt/solr/server/solr/solr.xml
