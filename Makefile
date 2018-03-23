@@ -1,6 +1,6 @@
 -include env_make
 
-SOLR_VER ?= 7.1.0
+SOLR_VER ?= 7.2.1
 TAG ?= $(SOLR_VER)
 
 REPO = wodby/solr
