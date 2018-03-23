@@ -9,7 +9,9 @@ ENV SOLR_HEAP="1024m" \
 
 USER root
 
-RUN apk add --no-cache \
+RUN set -ex; \
+    \
+    apk add --no-cache \
         curl \
         make \
         sudo; \
