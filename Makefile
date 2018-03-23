@@ -7,9 +7,9 @@ REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
 
 ifneq ($(STABILITY_TAG),)
-ifneq ($(TAG),latest)
-    override TAG := $(TAG)-$(STABILITY_TAG)
-endif
+    ifneq ($(TAG),latest)
+        override TAG := $(TAG)-$(STABILITY_TAG)
+    endif
 endif
 
 .PHONY: build test push shell run start stop logs clean release
@@ -20,7 +20,7 @@ build:
 	docker build -t $(REPO):$(TAG) --build-arg SOLR_VER=$(SOLR_VER) ./
 
 test:
-	IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./test.sh
+	IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./test
 
 push:
 	docker push $(REPO):$(TAG)

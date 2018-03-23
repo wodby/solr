@@ -22,7 +22,7 @@ endif
 default: create
 
 init:
-	init-solr.sh $(host)
+	init_solr $(host)
 
 # We don't use solr CLI because it does not create configs out of config set.
 create:
@@ -51,7 +51,7 @@ ping:
 		| head -n 1 | awk '{print $$2}' | grep -q 200
 
 check-ready:
-	wait-solr.sh $(host) $(max_try) $(wait_seconds) $(delay_seconds)
+	wait_solr $(host) $(max_try) $(wait_seconds) $(delay_seconds)
 
 check-live:
 	@echo "OK"
