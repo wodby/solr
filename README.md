@@ -41,7 +41,7 @@ Usage:
 make COMMAND [params ...]
 
 commands:
-    create (default) core [host config_set] 
+    create (default) core [host config_set instance_dir] 
     init [host] 
     ping core [host]
     reload core [host]
