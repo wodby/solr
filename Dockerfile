@@ -27,7 +27,7 @@ RUN set -ex; \
     \
     rm -rf /var/cache/apk/*
 
-COPY actions /usr/local/bin
+COPY bin /usr/local/bin
 COPY entrypoint.sh /
 
 USER $SOLR_USER

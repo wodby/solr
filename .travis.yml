@@ -4,22 +4,17 @@ services:
   - docker
 
 env:
-  global:
-    - DOCKER_VERSION=17.06.2
-    - LATEST_TAG=7.2
   matrix:
-    - TAG=7.2 SOLR_VER=7.2.1 EXTRA_TAG=7
-    - TAG=7.1 SOLR_VER=7.1.0
-    - TAG=7.0 SOLR_VER=7.0.1
-    - TAG=6.6 SOLR_VER=6.6.3 EXTRA_TAG=6
-    - TAG=6.5 SOLR_VER=6.5.1
-    - TAG=6.4 SOLR_VER=6.4.2
-    - TAG=6.3 SOLR_VER=6.3.0
-    - TAG=5.5 SOLR_VER=5.5.5 EXTRA_TAG=5
-    - TAG=5.4 SOLR_VER=5.4.1
+    - SOLR_VER=7.4.0 TAGS=7.4,7,latest
+    - SOLR_VER=7.3.1 TAGS=7.3
+    - SOLR_VER=7.2.1 TAGS=7.2
+    - SOLR_VER=7.1.0 TAGS=7.1
+    - SOLR_VER=6.6.4 TAGS=6.6,6
+    - SOLR_VER=5.5.5 TAGS=5.5
+    - SOLR_VER=5.4.1 TAGS=5.4
 
 script:
   - make && make test
 
 after_success:
-  - bash "${TRAVIS_BUILD_DIR}/travis_release"
+  - . "${TRAVIS_BUILD_DIR}/release.sh"

@@ -20,7 +20,7 @@ build:
 	docker build -t $(REPO):$(TAG) --build-arg SOLR_VER=$(SOLR_VER) ./
 
 test:
-	IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./test
+	IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./test.sh
 
 push:
 	docker push $(REPO):$(TAG)

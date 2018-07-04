@@ -7,7 +7,7 @@
 
 ## Docker Images
 
-!!! For better reliability we release images with stability tags (`wodby/solr:7-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We **STRONGLY RECOMMEND** using images only with stability tags. 
+❗️For better reliability we release images with stability tags (`wodby/solr:7-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
 
 * All images are based on Alpine Linux
 * Base image: [solr](https://hub.docker.com/r/_/solr)
@@ -18,21 +18,19 @@
 
 Supported tags and respective `Dockerfile` links:
 
-* `7`, `7.2` `latest` [_(Dockerfile)_]
+* `7.4`, `7`, `latest` [_(Dockerfile)_]
+* `7.3` [_(Dockerfile)_]
+* `7.2` [_(Dockerfile)_]
 * `7.1` [_(Dockerfile)_]
-* `7.0` [_(Dockerfile)_]
-* `6`, `6.6` [_(Dockerfile)_]
-* `6.5` [_(Dockerfile)_]
-* `6.4` [_(Dockerfile)_]
-* `6.3` [_(Dockerfile)_]
-* `5`, `5.5` [_(Dockerfile)_]
+* `6.6`, `6` [_(Dockerfile)_]
+* `5.5`, `5` [_(Dockerfile)_]
 * `5.4` [_(Dockerfile)_]
 
 ## Environment Variables
 
-| Variable  | Default Value |
-| --------- | ------------- |
-| SOLR_HEAP | 1024m         |
+| Variable    | Default Value |
+| ----------- | ------------- |
+| `SOLR_HEAP` | `1024m `      |
 
 ## Orchestration actions
 
