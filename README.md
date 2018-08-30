@@ -22,7 +22,11 @@ Supported tags and respective `Dockerfile` links:
 * `7.3` [_(Dockerfile)_]
 * `7.2` [_(Dockerfile)_]
 * `7.1` [_(Dockerfile)_]
+* `7.0` [_(Dockerfile)_]
 * `6.6`, `6` [_(Dockerfile)_]
+* `6.5` [_(Dockerfile)_]
+* `6.4` [_(Dockerfile)_]
+* `6.3` [_(Dockerfile)_]
 * `5.5`, `5` [_(Dockerfile)_]
 * `5.4` [_(Dockerfile)_]
 
