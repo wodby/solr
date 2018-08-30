@@ -8,12 +8,13 @@ fi
 
 sudo init_volumes
 
-if [[ ! -f /opt/solr/server/solr/solr.xml ]]; then
-    cp /opt/docker-solr/solr.xml /opt/solr/server/solr/solr.xml
-fi
+# Symlinks config sets to volume.
+for configset in $(ls -d /opt/docker-solr/configsets/*); do
+    ln -s "${configset}" /opt/solr/server/solr/configsets/;
+done
 
-if [[ ! -d /opt/solr/server/solr/configsets ]]; then
-    cp -r /opt/docker-solr/configsets /opt/solr/server/solr/configsets
+if [[ ! -f /opt/solr/server/solr/solr.xml ]]; then
+    ln -s /opt/docker-solr/solr.xml /opt/solr/server/solr/solr.xml
 fi
 
 sed -i 's@^SOLR_HEAP=".*"@'"SOLR_HEAP=${SOLR_HEAP}"'@' /opt/solr/bin/solr.in.sh

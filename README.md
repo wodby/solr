@@ -32,9 +32,31 @@ Supported tags and respective `Dockerfile` links:
 
 ## Environment Variables
 
-| Variable    | Default Value |
-| ----------- | ------------- |
-| `SOLR_HEAP` | `1024m `      |
+| Variable                  | Default Value | Description                     |
+| ------------------------- | ------------- | ------------------------------- |
+| `SOLR_HEAP`               | `1024m `      |                                 |
+| `SOLR_DEFAULT_CONFIG_SET` |               | See [config sets](#config-sets) |
+
+## Config sets
+
+### Drupal Search API Solr
+
+Apart from the default config set, this image contains predefined config sets for Drupal from [Search API Solr](https://www.drupal.org/project/search_api_solr) module. To set one of the following config sets as a default for new cores, add environment variable `$SOLR_DEFAULT_CONFIG_SET` with the value `search_api_solr_[VERSION]` with `[VERSION]` replaced to one of the listed below, e.g. `search_api_solr_8.x-2.1`.
+
+Matrix of Search API Solr x Solr version support.
+
+| Version  | Solr 7.x | Solr 6.x | Solr 5.x |
+| -------- | -------- | -------- | -------- |
+| 8.x-2.1  | ✓        | ✓        |          |
+| 8.x-2.0  | ✓        | ✓        |          |
+| 8.x-1.2  |          | ✓        | ✓        |
+| 8.x-1.1  |          | ✓        | ✓        |
+| 8.x-1.0  |          | ✓        | ✓        |
+| 7.x-1.12 |          |          | ✓        |
+| 7.x-1.11 |          |          | ✓        |
+| 7.x-1.10 |          |          | ✓        |
+| 7.x-1.8  |          |          | ✓        |
+| 7.x-1.9  |          |          | ✓        |
 
 ## Orchestration actions
 
@@ -60,4 +82,4 @@ default params values:
 
 ## Deployment
 
-Deploy Solr to your server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://cloud.wodby.com/stackhub/dc8074a9-f27d-44a8-8f88-5922b4e16d2f).
+Deploy Solr to your server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com/stacks/solr).

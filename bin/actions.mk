@@ -12,11 +12,15 @@ max_try ?= 1
 wait_seconds ?= 1
 delay_seconds ?= 1
 
-# New versions of solr have a different name of the default config set
-ifneq ("$(wildcard /opt/docker-solr/configsets/_default)","")
-    config_set ?= _default
-else
-    config_set ?= data_driven_schema_configs
+ifeq ($(config_set),)
+    ifneq ($(SOLR_DEFAULT_CONFIG_SET),)
+		config_set ?= $(SOLR_DEFAULT_CONFIG_SET)
+    # New versions of solr have a different name of the default config set
+    else ifneq ("$(wildcard /opt/docker-solr/configsets/_default)","")
+        config_set ?= _default
+    else
+        config_set ?= data_driven_schema_configs
+    endif
 endif
 
 default: create
@@ -37,6 +41,7 @@ delete:
 	$(call check_defined, core)
 	curl -sIN "http://$(host):8983/solr/admin/cores?action=UNLOAD&core=$(core)&deleteIndex=true&deleteDataDir=true&deleteInstanceDir=true" \
 		| head -n 1 | awk '{print $$2}' | grep -q 200
+	rm -rf "/opt/solr/server/solr/$(core)"
 
 reload:
 	$(call check_defined, core)
