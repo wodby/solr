@@ -8,6 +8,8 @@ fi
 
 sudo init_volumes
 
+mkdir -p /opt/solr/server/solr/configsets
+
 # Symlinks config sets to volume.
 for configset in $(ls -d /opt/docker-solr/configsets/*); do
     ln -s "${configset}" /opt/solr/server/solr/configsets/;
