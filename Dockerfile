@@ -36,7 +36,6 @@ RUN set -ex; \
     \
     apk del --purge .solr-build-deps; \
     rm -rf \
-        /opt/docker-solr/configsets/sample_techproducts_configs \
         /opt/solr/server/solr/mycores \
         search-api-solr.sh \
         /var/cache/apk/*
