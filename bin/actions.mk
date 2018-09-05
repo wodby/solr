@@ -19,7 +19,7 @@ ifeq ($(config_set),)
     else ifneq ("$(wildcard /opt/docker-solr/configsets/_default)","")
         config_set ?= _default
     else
-        config_set ?= data_driven_schema_configs
+        config_set ?= basic_configs
     endif
 endif
 
