@@ -10,9 +10,7 @@ sudo init_volumes
 
 mkdir -p /opt/solr/server/solr/configsets
 
-if [[ -n "${SOLR_RUN_MIGRATION}" ]]; then
-    migrate
-fi
+migrate
 
 # Symlinks config sets to volume.
 for configset in $(ls -d /opt/docker-solr/configsets/*); do
