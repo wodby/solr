@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -n "${DEBUG}" ]]; then
+    set -x
+fi
+
+# Bug in 2.4.0
+if [[ -d /opt/solr/server/solr/configsets/configsets ]]; then
+    rm -rf /opt/solr/server/solr/configsets/configsets
+fi
+
+# Prior to 3.0.0 we copied config sets instead of symlinking, remove them.
+default_config_sets=("_default" "sample_techproducts_configs" "data_driven_schema_configs" "basic_configs")
+
+for config_set in "${default_config_sets[@]}"; do
+    dir="/opt/solr/server/solr/configsets/${config_set}"
+
+    if [[ -d "${dir}" && ! -L "${dir}" ]]; then
+        rm -rf "${dir}"
+    fi
+done
