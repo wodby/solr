@@ -10,7 +10,7 @@ host="solr"
 core="core1"
 
 cid="$(
-	docker run -d -e DEBUG -e SOLR_RUN_MIGRATION=1 --name "${NAME}" "${IMAGE}"
+	docker run -d -e DEBUG --name "${NAME}" "${IMAGE}"
 )"
 trap "docker rm -vf ${cid} > /dev/null" EXIT
 
