@@ -18,6 +18,10 @@ for config_set in "${default_config_sets[@]}"; do
     dir="/opt/solr/server/solr/configsets/${config_set}"
 
     if [[ -d "${dir}" && ! -L "${dir}" ]]; then
-        rm -rf "${dir}"
+        echo
+        echo "WARNING! The default config set ${config_set} is not a symlink!"
+        echo "If you customized this config set you should rename it or move its config inside your solr core directory."
+        echo "To restore this config set as a symlink delete the directory (${dir}) and restart the container"
+        echo
     fi
 done
