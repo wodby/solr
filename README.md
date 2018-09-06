@@ -79,7 +79,7 @@ default params values:
 
 ## Deployment
 
-Deploy Solr to your server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby]: 
+Deploy Solr to your server via ![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby: 
 
 * [Generic Solr](https://wodby.com/stacks/solr)
 * [Solr for Drupal](https://wodby.com/stacks/solr-drupal)
