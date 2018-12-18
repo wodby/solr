@@ -1,7 +1,0 @@
-tests
-.gitignore
-.solr
-.travis.yml
-Makefile
-README.md
-release.sh
