@@ -9,7 +9,7 @@ ENV SOLR_HEAP="1024m" \
 
 USER root
 
-COPY search-api-solr.sh .
+COPY search-api-solr /tmp/search-api-solr
 
 RUN set -ex; \
     \
@@ -21,7 +21,8 @@ RUN set -ex; \
     \
     apk add --update --no-cache -t .solr-build-deps \
         jq \
-        python3; \
+        python3 \
+        sed; \
     \
     pip3 install yq; \
     \
@@ -29,15 +30,15 @@ RUN set -ex; \
     chmod +x /usr/local/bin/init_volumes; \
     echo 'solr ALL=(root) NOPASSWD:SETENV: /usr/local/bin/init_volumes' > /etc/sudoers.d/solr; \
     \
-    bash search-api-solr.sh; \
+    bash /tmp/search-api-solr/download.sh; \
     # Move out from volume to always keep them inside of the image.
     mv /opt/solr/server/solr/configsets/* /opt/docker-solr/configsets/; \
     mv /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml; \
     \
     apk del --purge .solr-build-deps; \
     rm -rf \
+        /tmp/search-api-solr \
         /opt/solr/server/solr/mycores \
-        search-api-solr.sh \
         /var/cache/apk/*
 
 COPY bin /usr/local/bin

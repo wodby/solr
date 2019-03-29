@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
-
-if [[ -n "${DEBUG}" ]]; then
-    set -x
-fi
+set -ex
 
 cd /opt/docker-solr/
 
@@ -32,7 +28,11 @@ for drupal in "8.x" "7.x"; do
             echo "adding config set for ${SOLR_VER:0:1}.x"
             conf_dir="configsets/search_api_solr_${version}"
             mkdir -p "${conf_dir}"
-            mv "${dir}" "${conf_dir}/conf"; \
+            mv "${dir}" "${conf_dir}/conf"
+
+            if [[ "${drupal}" == "7.x" ]]; then
+                sed -i -E '/^\s+<lib.+?clustering\/lib/r /tmp/search-api-solr/d7-extra-libs.xml' "${conf_dir}/conf/solrconfig.xml"
+            fi
         else
             echo "does not support Solr ${SOLR_VER:0:1}.x"
         fi
