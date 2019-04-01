@@ -18,15 +18,11 @@
 
 Supported tags and respective `Dockerfile` links:
 
-* `7.5`, `7`, `latest` [_(Dockerfile)_]
-* `7.4` [_(Dockerfile)_]
-* `7.3` [_(Dockerfile)_]
-* `7.2` [_(Dockerfile)_]
-* `7.1` [_(Dockerfile)_]
+* `7.7`, `7`, `latest` [_(Dockerfile)_]
+* `7.6` [_(Dockerfile)_]
+* `7.5` [_(Dockerfile)_]
 * `6.6`, `6` [_(Dockerfile)_]
-* `6.4` [_(Dockerfile)_]
 * `5.5`, `5` [_(Dockerfile)_]
-* `5.4` [_(Dockerfile)_]
 
 ## Environment Variables
 
@@ -45,6 +41,10 @@ Matrix of Search API Solr x Solr version support.
 
 | Version  | Solr 7.x | Solr 6.x | Solr 5.x |
 | -------- | -------- | -------- | -------- |
+| 8.x-2.7  | ✓        | ✓        |          |
+| 8.x-2.6  | ✓        | ✓        |          |
+| 8.x-2.5  | ✓        | ✓        |          |
+| 8.x-2.4  | ✓        | ✓        |          |
 | 8.x-2.3  | ✓        | ✓        |          |
 | 8.x-2.2  | ✓        | ✓        |          |
 | 8.x-2.1  | ✓        | ✓        |          |
