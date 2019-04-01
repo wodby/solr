@@ -33,6 +33,8 @@ for drupal in "8.x" "7.x"; do
             if [[ "${drupal}" == "7.x" ]]; then
                 sed -i -E '/^\s+<lib.+?clustering\/lib/r /tmp/search-api-solr/d7-extra-libs.xml' "${conf_dir}/conf/solrconfig.xml"
             fi
+
+            chown -R solr:solr "${conf_dir}"
         else
             echo "does not support Solr ${SOLR_VER:0:1}.x"
         fi
