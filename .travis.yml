@@ -8,7 +8,7 @@ env:
   - SOLR_VER=7.7.1 TAGS=7.7,7,latest
   - SOLR_VER=7.6.0 TAGS=7.6
   - SOLR_VER=7.5.0 TAGS=7.5
-  - SOLR_VER=6.6.5 TAGS=6.6,6
+  - SOLR_VER=6.6.6 TAGS=6.6,6
   - SOLR_VER=5.5.5 TAGS=5.5,5
 
 script:
