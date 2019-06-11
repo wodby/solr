@@ -2,7 +2,6 @@
 
 SOLR_VER ?= 7.5.0
 
-SOLR_VER_MAJOR = $(shell echo "${SOLR_VER}" | grep -oE '^[0-9]+')
 TAG ?= $(SOLR_VER)
 
 REPO = wodby/solr
@@ -24,7 +23,6 @@ build:
 	docker build -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg SOLR_VER=$(SOLR_VER) \
-		--build-arg SOLR_VER_MAJOR=$(SOLR_VER_MAJOR) \
 		./
 
 test:

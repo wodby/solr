@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
+
+if [[ -n "${DEBUG}" ]]; then
+    set -x
+fi
 
 cd /opt/docker-solr/
 
@@ -35,6 +39,8 @@ for drupal in "8.x" "7.x"; do
             fi
 
             chown -R solr:solr "${conf_dir}"
+        elif [[ "${version}" == "8.x-3."* ]]; then
+            echo "Pre-generated config sets for 8.x-3.* will be added separately"
         else
             echo "does not support Solr ${SOLR_VER:0:1}.x"
         fi

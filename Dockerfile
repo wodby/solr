@@ -3,7 +3,6 @@ ARG BASE_IMAGE_TAG
 FROM solr:${BASE_IMAGE_TAG}
 
 ARG SOLR_VER
-ARG SOLR_VER_MAJOR
 
 ENV SOLR_HEAP="1024m" \
     SOLR_VER="${SOLR_VER}"
@@ -11,7 +10,7 @@ ENV SOLR_HEAP="1024m" \
 USER root
 
 COPY search-api-solr /tmp/search-api-solr
-COPY configsets/"${SOLR_VER_MAJOR}.x" /opt/docker-solr/configsets/
+COPY configsets /tmp/configsets
 
 RUN set -ex; \
     \
@@ -32,6 +31,7 @@ RUN set -ex; \
     chmod +x /usr/local/bin/init_volumes; \
     echo 'solr ALL=(root) NOPASSWD:SETENV: /usr/local/bin/init_volumes' > /etc/sudoers.d/solr; \
     \
+    cp -R /tmp/configsets/"${SOLR_VER:0:1}.x"/* /opt/docker-solr/configsets/; \
     bash /tmp/search-api-solr/download.sh; \
     # Move out from volume to always keep them inside of the image.
     mv /opt/solr/server/solr/configsets/* /opt/docker-solr/configsets/; \
@@ -39,6 +39,7 @@ RUN set -ex; \
     \
     apk del --purge .solr-build-deps; \
     rm -rf \
+        /tmp/configsets \
         /tmp/search-api-solr \
         /opt/solr/server/solr/mycores \
         /var/cache/apk/*
