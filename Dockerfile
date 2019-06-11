@@ -3,6 +3,7 @@ ARG BASE_IMAGE_TAG
 FROM solr:${BASE_IMAGE_TAG}
 
 ARG SOLR_VER
+ARG SOLR_VER_MAJOR
 
 ENV SOLR_HEAP="1024m" \
     SOLR_VER="${SOLR_VER}"
@@ -10,6 +11,7 @@ ENV SOLR_HEAP="1024m" \
 USER root
 
 COPY search-api-solr /tmp/search-api-solr
+COPY configsets/"${SOLR_VER_MAJOR}.x" /opt/docker-solr/configsets/
 
 RUN set -ex; \
     \

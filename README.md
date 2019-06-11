@@ -41,7 +41,7 @@ Matrix of Search API Solr x Solr version support.
 
 | Version  | Solr 7.x | Solr 6.x | Solr 5.x |
 | -------- | -------- | -------- | -------- |
-| 8.x-3,0  | ✓        | ✓        |          |
+| 8.x-3.0  | ✓        | ✓        |          |
 | 8.x-2.7  | ✓        | ✓        |          |
 | 8.x-2.6  | ✓        | ✓        |          |
 | 8.x-2.5  | ✓        | ✓        |          |
