@@ -35,7 +35,9 @@ RUN set -ex; \
     # Move out from volume to always keep them inside of the image.
     mv /opt/solr/server/solr/configsets/* /opt/docker-solr/configsets/; \
     mv /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml; \
-    cp -R /tmp/configsets/"${SOLR_VER:0:1}.x"/* /opt/docker-solr/configsets/; \
+    if [[ -d /tmp/configsets/"${SOLR_VER:0:1}.x"/ ]]; then \
+        cp -R /tmp/configsets/"${SOLR_VER:0:1}.x"/* /opt/docker-solr/configsets/; \
+    fi; \
     \
     apk del --purge .solr-build-deps; \
     rm -rf \
