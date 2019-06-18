@@ -38,6 +38,7 @@ RUN set -ex; \
     if [[ -d /tmp/configsets/"${SOLR_VER:0:1}.x"/ ]]; then \
         cp -R /tmp/configsets/"${SOLR_VER:0:1}.x"/* /opt/docker-solr/configsets/; \
     fi; \
+    chown -R solr:solr /opt/docker-solr/configsets; \
     \
     apk del --purge .solr-build-deps; \
     rm -rf \
