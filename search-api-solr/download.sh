@@ -24,23 +24,21 @@ for drupal in "8.x" "7.x"; do
         mkdir -p "${tmp_dir}"
         wget -qO- "${search_api_url}-${version}.tar.gz" | tar xz -C "${tmp_dir}"
 
-        dir="${tmp_dir}/search_api_solr/solr-conf/${SOLR_VER:0:1}.x"
+        dir="${tmp_dir}/search_api_solr/"
 
         echo -n "Search Api Solr ${version}: "
 
-        if [[ -d "${dir}" ]]; then
+        if [[ -d "${dir}/solr-conf-templates" ]]; then
+            echo "This version of solr does not provide ready-to-use configsets. They should be generated via the module and added manually."
+        elif [[ -d "${dir}/solr-conf/${SOLR_VER:0:1}.x" ]]; then
             echo "adding config set for ${SOLR_VER:0:1}.x"
             conf_dir="configsets/search_api_solr_${version}"
             mkdir -p "${conf_dir}"
-            mv "${dir}" "${conf_dir}/conf"
+            mv "${dir}/solr-conf/${SOLR_VER:0:1}.x" "${conf_dir}/conf"
 
             if [[ "${drupal}" == "7.x" ]]; then
                 sed -i -E '/^\s+<lib.+?clustering\/lib/r /tmp/search-api-solr/d7-extra-libs.xml' "${conf_dir}/conf/solrconfig.xml"
             fi
-
-            chown -R solr:solr "${conf_dir}"
-        elif [[ "${version}" == "8.x-3."* ]]; then
-            echo "Pre-generated config sets for 8.x-3.* will be added separately"
         else
             echo "does not support Solr ${SOLR_VER:0:1}.x"
         fi
