@@ -27,6 +27,13 @@ RUN set -ex; \
     \
     pip3 install yq; \
     \
+    # 8.x version has a symlink and wrong permissions.
+    if [[ -d "/opt/solr-${SOLR_VER}" ]]; then \
+        rm -rf /opt/solr; \
+        mv "/opt/solr-${SOLR_VER}" /opt/solr; \
+        chown -R solr:solr /opt/solr /etc/default/; \
+        cd /opt/solr; \
+    fi; \
     echo "chown solr:solr /opt/solr/server/solr" > /usr/local/bin/init_volumes; \
     chmod +x /usr/local/bin/init_volumes; \
     echo 'solr ALL=(root) NOPASSWD:SETENV: /usr/local/bin/init_volumes' > /etc/sudoers.d/solr; \
@@ -34,7 +41,6 @@ RUN set -ex; \
     mkdir -p /opt/docker-solr/configsets; \
     bash /tmp/search-api-solr/download.sh; \
     # Move out from volume to always keep them inside of the image.
-    ls -la /opt/solr/server/solr/configsets/; \
     mv /opt/solr/server/solr/configsets/* /opt/docker-solr/configsets/; \
     mv /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml; \
     if [[ -d /tmp/configsets/"${SOLR_VER:0:1}.x"/ ]]; then \
