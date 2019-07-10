@@ -5,6 +5,7 @@ FROM wodby/base-solr:${SOLR_VER}
 ARG SOLR_VER
 
 ENV SOLR_HEAP="1024m" \
+    SOLR_HOME=/opt/solr/server/solr \
     SOLR_VER="${SOLR_VER}"
 
 USER root
