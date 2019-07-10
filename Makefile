@@ -1,13 +1,11 @@
 -include env_make
 
-SOLR_VER ?= 7.5.0
+SOLR_VER ?= 8.1.1
 
 TAG ?= $(SOLR_VER)
 
 REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
-
-BASE_IMAGE_TAG = $(SOLR_VER)-alpine
 
 ifneq ($(STABILITY_TAG),)
     ifneq ($(TAG),latest)
@@ -20,10 +18,7 @@ endif
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) \
-		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
-		--build-arg SOLR_VER=$(SOLR_VER) \
-		./
+	docker build -t $(REPO):$(TAG) --build-arg SOLR_VER=$(SOLR_VER) ./
 
 test:
 	cd ./tests && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh

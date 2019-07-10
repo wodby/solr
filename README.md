@@ -7,10 +7,10 @@
 
 ## Docker Images
 
-❗️For better reliability we release images with stability tags (`wodby/solr:7-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
+❗️For better reliability we release images with stability tags (`wodby/solr:8-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
 
 * All images are based on Alpine Linux
-* Base image: [solr](https://hub.docker.com/r/_/solr)
+* Base image: [wodby/base-solr](https://github.com/wodby/base-solr)
 * [Travis CI builds](https://travis-ci.org/wodby/solr) 
 * [Docker Hub](https://hub.docker.com/r/wodby/solr)
 
@@ -18,7 +18,8 @@
 
 Supported tags and respective `Dockerfile` links:
 
-* `7.7`, `7`, `latest` [_(Dockerfile)_]
+* `8.1`, `8`, `latest` [_(Dockerfile)_]
+* `7.7`, `7` [_(Dockerfile)_]
 * `7.6` [_(Dockerfile)_]
 * `7.5` [_(Dockerfile)_]
 * `6.6`, `6` [_(Dockerfile)_]
@@ -39,28 +40,28 @@ Apart from the default config set, this image contains predefined config sets fo
 
 Matrix of Search API Solr x Solr version support.
 
-| Version  | Solr 7.x | Solr 6.x | Solr 5.x |
-| -------- | -------- | -------- | -------- |
-| 8.x-3.0  | ✓        | ✓        |          |
-| 8.x-2.7  | ✓        | ✓        |          |
-| 8.x-2.6  | ✓        | ✓        |          |
-| 8.x-2.5  | ✓        | ✓        |          |
-| 8.x-2.4  | ✓        | ✓        |          |
-| 8.x-2.3  | ✓        | ✓        |          |
-| 8.x-2.2  | ✓        | ✓        |          |
-| 8.x-2.1  | ✓        | ✓        |          |
-| 8.x-2.0  | ✓        | ✓        |          |
-| 8.x-1.2  |          | ✓        | ✓        |
-| 8.x-1.1  |          | ✓        | ✓        |
-| 8.x-1.0  |          | ✓        | ✓        |
-| 7.x-1.14 | ✓        | ✓        | ✓        |
-| 7.x-1.13 | ✓        | ✓        | ✓        |
-| 7.x-1.12 |          | ✓        | ✓        |
-| 7.x-1.11 |          |          | ✓        |
-| 7.x-1.10 |          |          | ✓        |
-| 7.x-1.9  |          |          | ✓        |
-| 7.x-1.8  |          |          | ✓        |
-| 7.x-1.7  |          |          | ✓        |
+| Version  | Solr 8.x | Solr 7.x | Solr 6.x | Solr 5.x |
+| -------- | -------- | -------- | -------- | -------- |
+| 8.x-3.2  | ✓        | ✓        | ✓        |          |
+| 8.x-2.7  |          | ✓        | ✓        |          |
+| 8.x-2.6  |          | ✓        | ✓        |          |
+| 8.x-2.5  |          | ✓        | ✓        |          |
+| 8.x-2.4  |          | ✓        | ✓        |          |
+| 8.x-2.3  |          | ✓        | ✓        |          |
+| 8.x-2.2  |          | ✓        | ✓        |          |
+| 8.x-2.1  |          | ✓        | ✓        |          |
+| 8.x-2.0  |          | ✓        | ✓        |          |
+| 8.x-1.2  |          |          | ✓        | ✓        |
+| 8.x-1.1  |          |          | ✓        | ✓        |
+| 8.x-1.0  |          |          | ✓        | ✓        |
+| 7.x-1.14 |          | ✓        | ✓        | ✓        |
+| 7.x-1.13 |          | ✓        | ✓        | ✓        |
+| 7.x-1.12 |          |          | ✓        | ✓        |
+| 7.x-1.11 |          |          |          | ✓        |
+| 7.x-1.10 |          |          |          | ✓        |
+| 7.x-1.9  |          |          |          | ✓        |
+| 7.x-1.8  |          |          |          | ✓        |
+| 7.x-1.7  |          |          |          | ✓        |
 
 ## Orchestration actions
 

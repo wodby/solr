@@ -1,6 +1,6 @@
-ARG BASE_IMAGE_TAG
+ARG SOLR_VER
 
-FROM solr:${BASE_IMAGE_TAG}
+FROM wodby/base-solr:${SOLR_VER}
 
 ARG SOLR_VER
 
@@ -31,8 +31,10 @@ RUN set -ex; \
     chmod +x /usr/local/bin/init_volumes; \
     echo 'solr ALL=(root) NOPASSWD:SETENV: /usr/local/bin/init_volumes' > /etc/sudoers.d/solr; \
     \
+    mkdir -p /opt/docker-solr/configsets; \
     bash /tmp/search-api-solr/download.sh; \
     # Move out from volume to always keep them inside of the image.
+    ls -la /opt/solr/server/solr/configsets/; \
     mv /opt/solr/server/solr/configsets/* /opt/docker-solr/configsets/; \
     mv /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml; \
     if [[ -d /tmp/configsets/"${SOLR_VER:0:1}.x"/ ]]; then \
