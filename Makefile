@@ -1,8 +1,9 @@
 -include env_make
 
 SOLR_VER ?= 8.1.1
+SOLR_MINOR_VER=$(shell echo "${SOLR_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
-TAG ?= $(SOLR_VER)
+TAG ?= $(SOLR_MINOR_VER)
 
 REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
