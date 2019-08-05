@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -n "${DEBUG}" ]]; then
+    set -x
+fi
+
+host=$1
+
+# Cleaning up broken configsets symlinks.
+for d in configsets/*; do
+    if [[ -L "${d}" && ! -e "${d}" ]]; then
+        echo "Found broken configset symlink ${d}. Removing."
+        rm -rf "${d}"
+    fi
+done
+
+# Checking if a default core has a broken configset. If does, we delete it and expect it to be recreated.
+configset=$(grep -P -o "(?<=configSet=).+" "{default/core.properties")
+
+if [[ ! -d "configsets/${configset}" ]]; then
+    echo "Default core has a broken config set. Deleting core. You must recreate it."
+    make delete host="${host}" core="default" -f /usr/local/bin/actions.mk
+fi

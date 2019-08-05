@@ -72,6 +72,7 @@ make COMMAND [params ...]
 commands:
     create (default) core [host config_set instance_dir] 
     init [host] 
+    upgrade 
     ping core [host]
     reload core [host]
     delete core [host]

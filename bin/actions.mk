@@ -49,6 +49,9 @@ reload:
 	curl -sIN "http://$(host):8983/solr/admin/cores?action=RELOAD&core=$(core)" \
 		| head -n 1 | awk '{print $$2}' | grep -q 200
 
+upgrade:
+	upgrade_core $(host)
+
 ping:
 	$(call check_defined, core)
 	echo "Pinging core $(core)"

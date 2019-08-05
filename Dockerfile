@@ -18,6 +18,7 @@ RUN set -ex; \
     apk add --no-cache \
         bash \
         curl \
+        grep \
         make \
         sudo; \
     \
