@@ -17,9 +17,10 @@ for d in configsets/*; do
 done
 
 # Checking if a default core has a broken configset. If does, we delete it and expect it to be recreated.
-configset=$(grep -P -o "(?<=configSet=).+" "{default/core.properties")
-
-if [[ ! -d "configsets/${configset}" ]]; then
-    echo "Default core has a broken config set. Deleting core. You must recreate it."
-    make delete host="${host}" core="default" -f /usr/local/bin/actions.mk
+if [[ -f default/core.properties ]]; then
+    configset=$(grep -P -o "(?<=configSet=).+" default/core.properties)
+    if [[ ! -d "configsets/${configset}" ]]; then
+        echo "Default core has a broken config set. Deleting core. You must recreate it."
+        make delete host="${host}" core="default" -f /usr/local/bin/actions.mk
+    fi
 fi
