@@ -41,6 +41,7 @@ RUN set -ex; \
     echo 'solr ALL=(root) NOPASSWD:SETENV: /usr/local/bin/init_volumes' > /etc/sudoers.d/solr; \
     \
     mkdir -p /opt/docker-solr/configsets; \
+    mkdir -p /opt/solr/server/solr/configsets; \
     bash /tmp/search-api-solr/download.sh; \
     # Move out from volume to always keep them inside of the image.
     mv /opt/solr/server/solr/configsets/* /opt/docker-solr/configsets/; \
