@@ -24,7 +24,7 @@ RUN set -ex; \
     \
     apk add --update --no-cache -t .solr-build-deps \
         jq \
-        python3 \
+        py3-pip \
         sed; \
     \
     pip3 install yq; \
