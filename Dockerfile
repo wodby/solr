@@ -45,8 +45,8 @@ RUN set -ex; \
     # Move out from volume to always keep them inside of the image.
     mv /opt/solr/server/solr/configsets/* /opt/docker-solr/configsets/; \
     mv /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml; \
-    if [[ -d /tmp/configsets/"${SOLR_VER:0:1}.x"/ ]]; then \
-        cp -R /tmp/configsets/"${SOLR_VER:0:1}.x"/* /opt/docker-solr/configsets/; \
+    if [[ -d /tmp/configsets/"${SOLR_VER:0:1}"/ ]]; then \
+        cp -R /tmp/configsets/"${SOLR_VER:0:1}"/* /opt/docker-solr/configsets/; \
     fi; \
     chown -R solr:solr /opt/docker-solr/configsets; \
     \
