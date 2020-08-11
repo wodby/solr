@@ -5,7 +5,7 @@ services:
 
 env:
   matrix:
-  - SOLR_VER=8.5.2 TAGS=8.5,8,latest
+  - SOLR_VER=8.6.0 TAGS=8.6,8,latest
   - SOLR_VER=7.7.3 TAGS=7.7,7
   - SOLR_VER=7.6.0 TAGS=7.6
   - SOLR_VER=7.5.0 TAGS=7.5
