@@ -32,6 +32,10 @@ Supported tags and respective `Dockerfile` links:
 | `SOLR_HEAP`               | `1024m `      |                                 |
 | `SOLR_DEFAULT_CONFIG_SET` |               | See [config sets](#config-sets) |
 
+## Data persistence
+
+To persist data, mount a volume at `/opt/solr/server/solr`. The entrypoint script will copy required files into place and ensure ownership by the `solr` user.
+
 ## Config sets
 
 ### Drupal Search API Solr
@@ -67,7 +71,8 @@ Matrix of Search API Solr x Solr version support.
 
 ## Orchestration actions
 
-Usage:
+Commands from the upstream image for [creating cores](https://github.com/docker-solr/docker-solr#creating-cores) on startup (e.g., `solr-precreate`) are available In addition, various actions are available via `make`:
+
 ```
 make COMMAND [params ...]
 
