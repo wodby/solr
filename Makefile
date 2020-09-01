@@ -1,6 +1,6 @@
 -include env_make
 
-SOLR_VER ?= 8.6.1
+SOLR_VER ?= 8.6.2
 SOLR_MINOR_VER=$(shell echo "${SOLR_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
 TAG ?= $(SOLR_MINOR_VER)
