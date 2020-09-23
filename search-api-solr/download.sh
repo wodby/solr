@@ -15,6 +15,10 @@ for drupal in "current"; do
     versions=($(curl -s "${api_url}/${drupal}" | xq -r '.project.releases[] | .[] | select (has("version_extra") | not).version'))
 
     for version in "${versions[@]}"; do
+        if [[ "${version}" =~ alpha|beta ]]; then
+          echo "Skip ${version}"
+          continue
+        fi
         tmp_dir="search_api_solr_${version}"
         mkdir -p "${tmp_dir}"
         wget -qO- "${search_api_url}-${version}.tar.gz" | tar xz -C "${tmp_dir}"
