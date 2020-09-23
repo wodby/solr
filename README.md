@@ -9,7 +9,7 @@
 
 ❗️For better reliability we release images with stability tags (`wodby/solr:8-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
 
-* All images are based on Alpine Linux
+* All images based on Alpine Linux
 * Base image: [wodby/base-solr](https://github.com/wodby/base-solr)
 * [Travis CI builds](https://travis-ci.org/wodby/solr) 
 * [Docker Hub](https://hub.docker.com/r/wodby/solr)
@@ -42,7 +42,11 @@ Matrix of Search API Solr x Solr version support.
 
 | Version  | Solr 8.x | Solr 7.x | Solr 6.x | Solr 5.x |
 | -------- | -------- | -------- | -------- | -------- |
+| 4.1.6    | ✓        | ✓        |          |          |
+| 4.0.1    | ✓        | ✓        |          |          |
+| 4.0.0    | ✓        | ✓        |          |          |
 | 4.0      | ✓        | ✓        |          |          |
+| 4.0.0    | ✓        | ✓        |          |          |
 | 8.x-3.9  | ✓        | ✓        | ✓        |          |
 | 8.x-3.2  | ✓        | ✓        | ✓        |          |
 | 8.x-2.7  |          | ✓        | ✓        |          |
