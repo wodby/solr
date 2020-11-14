@@ -1,0 +1,30 @@
+name: Build
+description: Build solr image
+inputs:
+  version:
+    description: alpine version
+    required: true
+  tags:
+    description: image tags
+    required: true
+  username:
+    description: docker username
+    required: true
+  password:
+    description: docker password
+    required: true
+runs:
+  using: "composite"
+  steps:
+  - name: Build image
+    env:
+      SOLR_VER: ${{ inputs.version }}
+      DOCKER_USERNAME: ${{ inputs.username }}
+      DOCKER_PASSWORD: ${{ inputs.password }}
+      TAGS: ${{ inputs.tags }}
+    run: |
+      set -e
+      make
+      make test
+      . $GITHUB_ACTION_PATH/release.sh
+    shell: bash
