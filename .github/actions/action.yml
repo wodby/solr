@@ -2,7 +2,7 @@ name: Build
 description: Build solr image
 inputs:
   version:
-    description: alpine version
+    description: version
     required: true
   tags:
     description: image tags
