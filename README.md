@@ -9,10 +9,10 @@
 
 ❗️For better reliability we release images with stability tags (`wodby/solr:8-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
 
-* All images based on Alpine Linux
-* Base image: [wodby/base-solr](https://github.com/wodby/base-solr)
+- All images based on Alpine Linux
+- Base image: [wodby/base-solr](https://github.com/wodby/base-solr)
 - [GitHub actions builds](https://github.com/wodby/solr/actions) 
-* [Docker Hub](https://hub.docker.com/r/wodby/solr)
+- [Docker Hub](https://hub.docker.com/r/wodby/solr)
 
 [_(Dockerfile)_]: https://github.com/wodby/solr/tree/master/Dockerfile
 
