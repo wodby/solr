@@ -10,6 +10,10 @@ on:
 
   pull_request:
 
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   solr-8:
     runs-on: ubuntu-latest
@@ -17,10 +21,8 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 8.8
+        version: 8.8.0
         tags: 8,8,latest
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
   solr-77:
     runs-on: ubuntu-latest
     steps:
@@ -29,8 +31,6 @@ jobs:
       with:
         version: 7.7.3
         tags: 7.7,7
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
   solr-76:
     runs-on: ubuntu-latest
     steps:
@@ -39,8 +39,6 @@ jobs:
       with:
         version: 7.6.0
         tags: 7.6
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
   solr-75:
     runs-on: ubuntu-latest
     steps:
@@ -49,8 +47,6 @@ jobs:
       with:
         version: 7.5.0
         tags: 7.5
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
   solr-66:
     runs-on: ubuntu-latest
     steps:
@@ -59,8 +55,6 @@ jobs:
       with:
         version: 6.6.6
         tags: 6.6,6
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
   solr-55:
     runs-on: ubuntu-latest
     steps:
@@ -69,5 +63,3 @@ jobs:
       with:
         version: 5.5.5
         tags: 5.5,5
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
