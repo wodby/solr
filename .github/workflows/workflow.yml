@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: '8.10.1'
+        version: '8.11.0'
         tags: 8,8,latest
   solr-77:
     runs-on: ubuntu-latest
