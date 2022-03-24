@@ -59,6 +59,7 @@ RUN set -ex; \
 
 COPY bin /usr/local/bin
 COPY entrypoint.sh /
+COPY security.json /
 
 USER solr
 

@@ -3,7 +3,6 @@
 [![Build Status](https://github.com/wodby/solr/workflows/Build%20docker%20image/badge.svg)](https://github.com/wodby/solr/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/solr.svg)](https://hub.docker.com/r/wodby/solr)
-[![Docker Layers](https://images.microbadger.com/badges/image/wodby/solr.svg)](https://microbadger.com/images/wodby/solr)
 
 ## Docker Images
 
@@ -28,43 +27,17 @@ Supported tags and respective `Dockerfile` links:
 ## Environment Variables
 
 | Variable                  | Default Value | Description                     |
-| ------------------------- | ------------- | ------------------------------- |
+|---------------------------|---------------|---------------------------------|
 | `SOLR_HEAP`               | `1024m `      |                                 |
-| `SOLR_DEFAULT_CONFIG_SET` |               | See [config sets](#config-sets) |
+| `ZK_HOSTS`                |               |                                 |
 
 ## Config sets
 
 ### Drupal Search API Solr
 
-Apart from the default config set, this image contains predefined config sets for Drupal from [Search API Solr](https://www.drupal.org/project/search_api_solr) module. To set one of the following config sets as a default for new cores, add environment variable `$SOLR_DEFAULT_CONFIG_SET` with the value `search_api_solr_[VERSION]` with `[VERSION]` replaced to one of the listed below, e.g. `search_api_solr_4.0` or `search_api_solr_8.x-3.9`.
+We recommend running Solr with Zookeeper (Solr Cloud mode) and uploading config sets directly from the Search API Solr Admin UI.
 
-Matrix of Search API Solr x Solr version support.
-
-| Version  | Solr 8.x | Solr 7.x | Solr 6.x | Solr 5.x |
-| -------- | -------- | -------- | -------- | -------- |
-| 4.1.6    | ✓        | ✓        |          |          |
-| 4.0.1    | ✓        | ✓        |          |          |
-| 8.x-3.9  | ✓        | ✓        | ✓        |          |
-| 8.x-3.2  | ✓        | ✓        | ✓        |          |
-| 8.x-2.7  |          | ✓        | ✓        |          |
-| 8.x-2.6  |          | ✓        | ✓        |          |
-| 8.x-2.5  |          | ✓        | ✓        |          |
-| 8.x-2.4  |          | ✓        | ✓        |          |
-| 8.x-2.3  |          | ✓        | ✓        |          |
-| 8.x-2.2  |          | ✓        | ✓        |          |
-| 8.x-2.1  |          | ✓        | ✓        |          |
-| 8.x-2.0  |          | ✓        | ✓        |          |
-| 8.x-1.2  |          |          | ✓        | ✓        |
-| 8.x-1.1  |          |          | ✓        | ✓        |
-| 8.x-1.0  |          |          | ✓        | ✓        |
-| 7.x-1.14 |          | ✓        | ✓        | ✓        |
-| 7.x-1.13 |          | ✓        | ✓        | ✓        |
-| 7.x-1.12 |          |          | ✓        | ✓        |
-| 7.x-1.11 |          |          |          | ✓        |
-| 7.x-1.10 |          |          |          | ✓        |
-| 7.x-1.9  |          |          |          | ✓        |
-| 7.x-1.8  |          |          |          | ✓        |
-| 7.x-1.7  |          |          |          | ✓        |
+Read [old approach instructions](docs/search_api_solr_old.md)
 
 ## Orchestration actions
 
@@ -73,12 +46,14 @@ Usage:
 make COMMAND [params ...]
 
 commands:
-    create (default) core [host config_set instance_dir] 
+    create (default) core [host config_set instance_dir]
+    create-collection collection shards 
     init [host] 
     upgrade 
     ping core [host]
     reload core [host]
     delete core [host]
+    update-default-password
     check-ready [host max_try wait_seconds]
  
 default params values:

@@ -8,10 +8,19 @@ fi
 
 host=$1
 
-# Create default core if there are no cores.
-cores=$(curl -s "http://${host}:8983/solr/admin/cores?action=STATUS" | { grep -c "instanceDir" || true; })
-
-if [[ "${cores}" == 0 ]]; then
-    echo "No solr cores found, creating a default core"
-    make create core="default" host="${host}" -f /usr/local/bin/actions.mk
+if [[ -n "${ZK_HOST}" ]]; then
+  docker-entrypoint.sh solr zk cp file:/security.json zk:/security.json
+  # Create default collection if there are no collections.
+  if curl -s "http://${host}:8983/solr/admin/collections?action=LIST" | grep -q '"collections":\[\]'; then
+      echo "No collections found, creating a default collection"
+      IFS=',' read -ra shards <<< "$ZK_HOST"
+      make create-collection collection="default" host="${host}" shards="${#shards[@]}" -f /usr/local/bin/actions.mk
+  fi
+else
+  # Create default core if there are no cores.
+  cores=$(curl -s "http://${host}:8983/solr/admin/cores?action=STATUS" | { grep -c "instanceDir" || true; })
+  if [[ "${cores}" == 0 ]]; then
+      echo "No solr cores found, creating a default core"
+      make create core="default" host="${host}" -f /usr/local/bin/actions.mk
+  fi
 fi

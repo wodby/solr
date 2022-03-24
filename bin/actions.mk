@@ -1,4 +1,4 @@
-.PHONY: init create delete reload ping check-ready check-live
+.PHONY: init create create-collection delete reload ping update-default-password check-ready check-live
 
 check_defined = \
     $(strip $(foreach 1,$1, \
@@ -36,6 +36,11 @@ create:
 	curl -sIN "http://$(host):8983/solr/admin/cores?action=CREATE&name=$(core)&configSet=$(config_set)&instanceDir=$(instance_dir)" \
 		| head -n 1 | awk '{print $$2}' | grep -q 200
 
+create-collection:
+	$(call check_defined, collection, shards)
+	echo "Creating collection $(collection) with default config"
+	solr create_collection -c $(collection) -n "_default" -shards $(shards)
+
 delete:
 	echo "Deleting core $(core)"
 	$(call check_defined, core)
@@ -57,6 +62,11 @@ ping:
 	echo "Pinging core $(core)"
 	curl -sIN "http://$(host):8983/solr/$(core)/admin/ping" \
 		| head -n 1 | awk '{print $$2}' | grep -q 200
+
+update-default-password:
+	$(call check_defined, password)
+	curl -s --user solr:SolrRocks http://$(host):8983/api/cluster/security/authentication \
+		-H 'Content-type:application/json' -d '{"set-user":{"solr":"$(password)"}}' | -q '"status":0'
 
 check-ready:
 	wait_solr $(host) $(max_try) $(wait_seconds) $(delay_seconds)
