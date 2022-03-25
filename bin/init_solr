@@ -9,7 +9,7 @@ fi
 host=$1
 
 if [[ -n "${ZK_HOST}" ]]; then
-  docker-entrypoint.sh solr zk cp file:/security.json zk:/security.json
+  solr zk cp file:/security.json zk:/security.json
   # Create default collection if there are no collections.
   if curl -s "http://${host}:8983/solr/admin/collections?action=LIST" | grep -q '"collections":\[\]'; then
       echo "No collections found, creating a default collection"
