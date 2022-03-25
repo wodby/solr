@@ -39,7 +39,7 @@ create:
 create-collection:
 	$(call check_defined, collection, shards)
 	echo "Creating collection $(collection) with default config"
-	solr create_collection -c $(collection) -n "_default" -shards $(shards)
+	@solr create_collection -c $(collection) -n "_default" -shards $(shards)
 
 delete:
 	echo "Deleting core $(core)"
@@ -65,7 +65,7 @@ ping:
 
 update-default-password:
 	$(call check_defined, password)
-	curl -s --user solr:SolrRocks http://$(host):8983/api/cluster/security/authentication \
+	@curl -s --user solr:SolrRocks http://$(host):8983/api/cluster/security/authentication \
 		-H 'Content-type:application/json' -d '{"set-user":{"solr":"$(password)"}}' | -q '"status":0'
 
 check-ready:
