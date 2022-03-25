@@ -1,4 +1,4 @@
-.PHONY: init create create-collection delete reload ping update-default-password check-ready check-live
+.PHONY: init create create-collection delete reload ping update-password check-ready check-live
 
 check_defined = \
     $(strip $(foreach 1,$1, \
@@ -63,10 +63,10 @@ ping:
 	curl -sIN "http://$(host):8983/solr/$(core)/admin/ping" \
 		| head -n 1 | awk '{print $$2}' | grep -q 200
 
-update-default-password:
-	$(call check_defined, password)
-	@curl -s --user solr:SolrRocks http://$(host):8983/api/cluster/security/authentication \
-		-H 'Content-type:application/json' -d '{"set-user":{"solr":"$(password)"}}' | -q '"status":0'
+update-password:
+	$(call check_defined, username, password, new_password)
+	@curl -s --user $(username):$(password) http://$(host):8983/api/cluster/security/authentication \
+		-H 'Content-type:application/json' -d '{"set-user":{"$(username)":"$(new_password)"}}' | grep -q '"status":0'
 
 check-ready:
 	wait_solr $(host) $(max_try) $(wait_seconds) $(delay_seconds)

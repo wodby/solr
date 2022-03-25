@@ -53,7 +53,7 @@ commands:
     ping core [host]
     reload core [host]
     delete core [host]
-    update-default-password
+    update-password username password new_password
     check-ready [host max_try wait_seconds]
  
 default params values:
