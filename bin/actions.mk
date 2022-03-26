@@ -37,9 +37,9 @@ create:
 		| head -n 1 | awk '{print $$2}' | grep -q 200
 
 create-collection:
-	$(call check_defined, collection, shards)
+	$(call check_defined, collection, num_shards, config)
 	echo "Creating collection $(collection) with default config"
-	@solr create_collection -c $(collection) -n "_default" -shards $(shards)
+	curl -sIN "http://$(host):8983/solr/admin/collections?action=CREATE&name=$(collection)&numShards=$(num_shards)&collection.configName=$(config)" | head -n 1 | awk '{print $$2}' | grep -q 200
 
 delete:
 	echo "Deleting core $(core)"

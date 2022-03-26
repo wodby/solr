@@ -48,14 +48,14 @@ make COMMAND [params ...]
 
 commands:
     create (default) core [host config_set instance_dir]
-    create-collection collection shards 
+    create-collection collection num_shards config [host] 
     init [host] 
     upgrade 
     ping core [host]
     reload core [host]
     delete core [host]
-    update-password username password new_password
-    add-admin-user admin_username admin_password user password
+    update-password username password new_password [host]
+    add-admin-user admin_username admin_password user password [host]
     check-ready [host max_try wait_seconds]
  
 default params values:

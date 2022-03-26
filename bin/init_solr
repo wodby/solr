@@ -13,8 +13,8 @@ if [[ -n "${ZK_HOST}" ]]; then
   # Create default collection if there are no collections.
   if curl -s "http://${host}:8983/solr/admin/collections?action=LIST" | grep -q '"collections":\[\]'; then
       echo "No collections found, creating a default collection"
-      IFS=',' read -ra shards <<< "$ZK_HOST"
-      make create-collection collection="default" host="${host}" shards="${#shards[@]}" -f /usr/local/bin/actions.mk
+      IFS=',' read -ra num_shards <<< "$ZK_HOST"
+      make create-collection collection="default" host="${host}" num_shards="${#num_shards[@]}" config="_default" -f /usr/local/bin/actions.mk
   fi
 else
   # Create default core if there are no cores.
