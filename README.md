@@ -55,6 +55,7 @@ commands:
     reload core [host]
     delete core [host]
     update-password username password new_password
+    add-admin-user admin_username admin_password user password
     check-ready [host max_try wait_seconds]
  
 default params values:

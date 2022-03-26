@@ -1,4 +1,4 @@
-.PHONY: init create create-collection delete reload ping update-password check-ready check-live
+.PHONY: init create create-collection delete reload ping update-password add-admin-user check-ready check-live
 
 check_defined = \
     $(strip $(foreach 1,$1, \
@@ -66,7 +66,14 @@ ping:
 update-password:
 	$(call check_defined, username, password, new_password)
 	@curl -s --user $(username):$(password) http://$(host):8983/api/cluster/security/authentication \
-		-H 'Content-type:application/json' -d '{"set-user":{"$(username)":"$(new_password)"}}' | grep -q '"status":0'
+		-H 'Content-type:application/json' -d '{"set-user":{"$(username)":"$(new_password)"}}' | grep -vq 'errorMessages'
+
+add-admin-user:
+	$(call check_defined, admin_username, admin_password, user, password)
+	@curl -s --user $(admin_username):$(admin_password) http://$(host):8983/solr/admin/authentication \
+		-H 'Content-type:application/json' -d '{"set-user":{"$(user)":"$(password)"}}' | grep -vq 'errorMessages'
+	@curl -s --user $(admin_username):$(admin_password) http://$(host):8983/solr/admin/authorization \
+		-H 'Content-type:application/json' -d '{"set-user-role":{"$(user)": ["admin"]}}' | grep -vq 'errorMessages'
 
 check-ready:
 	wait_solr $(host) $(max_try) $(wait_seconds) $(delay_seconds)
