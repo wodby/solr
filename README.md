@@ -31,6 +31,7 @@ Supported tags and respective `Dockerfile` links:
 | `SOLR_HEAP`               | `1024m `      |                                 |
 | `SOLR_DEFAULT_CONFIG_SET` |               | See [config sets](#config-sets) |
 | `ZK_HOSTS`                |               |                                 |
+| `SOLR_CLOUD_PASSWORD`     |               |                                 |
 
 ## Config sets
 
