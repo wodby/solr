@@ -9,8 +9,7 @@ fi
 host=$1
 
 if [[ -n "${ZK_HOST}" ]]; then
-  solr zk ls zk:/security.json &>/dev/null
-  if [[ $? == 1 ]]; then
+  if ! solr zk ls zk:/security.json &>/dev/null; then
     solr zk cp file:/security.json zk:/security.json
     if [[ -n "${SOLR_CLOUD_PASSWORD}" ]]; then
       make update-password host="${host}" username=solr password=SolrRocks new_password="${SOLR_CLOUD_PASSWORD}" \
