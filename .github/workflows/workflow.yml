@@ -15,8 +15,6 @@ env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   SOLR8: '8.11.1'
   SOLR77: '7.7.3'
-  SOLR76: '7.6.0'
-  SOLR75: '7.5.0'
   SOLR66: '6.6.6'
   SOLR55: '5.5.5'
 
@@ -38,24 +36,6 @@ jobs:
       with:
         version: ${{ env.SOLR77 }}
         tags: 7.7-alpine3.15,7-alpine3.15,7.7-alpine,7-alpine,7.7,7
-        alpine_ver: 3.15
-  solr-76:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.SOLR76 }}
-        tags: 7.6-alpine3.15,7.6-alpine,7.6
-        alpine_ver: 3.15
-  solr-75:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.SOLR75 }}
-        tags: 7.5-alpine3.15,7.5-alpine,7.5
         alpine_ver: 3.15
   solr-66:
     runs-on: ubuntu-latest
@@ -92,24 +72,6 @@ jobs:
       with:
         version: ${{ env.SOLR77 }}
         tags: 7.7-alpine3.13,7-alpine3.13
-        alpine_ver: 3.13
-  solr-76-alpine313:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.SOLR76 }}
-        tags: 7.6-alpine3.13
-        alpine_ver: 3.13
-  solr-75-alpine313:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.SOLR75 }}
-        tags: 7.5-alpine3.13
         alpine_ver: 3.13
   solr-66-alpine313:
     runs-on: ubuntu-latest
