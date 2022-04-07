@@ -17,10 +17,10 @@
 
 Supported tags and respective `Dockerfile` links:
 
-* `8-alpine3.15`, `8-alpine`, `8`, `alpine3.15`, `alpine`, `latest` [_(Dockerfile)_]
-* `7.7-alpine3.15`, `7-alpine3.15`, `7.7-alpine`, `7-alpine`, `7.7`, `7` [_(Dockerfile)_]
-* `6.6-alpine3.15`, `6-alpine3.15`, `6.6-alpine`, `6-alpine`, `6.6`, `6` [_(Dockerfile)_]
-* `5.5-alpine3.15`, `5-alpine3.15`, `5.5-alpine`, `5-alpine`,  `5.5`, `5` [_(Dockerfile)_]
+* `8-alpine3.15`, `8`, `alpine3.15`, `latest` [_(Dockerfile)_]
+* `7.7-alpine3.15`, `7-alpine3.15`, `7.7`, `7` [_(Dockerfile)_]
+* `6.6-alpine3.15`, `6-alpine3.15`, `6.6`, `6` [_(Dockerfile)_]
+* `5.5-alpine3.15`, `5-alpine3.15`, `5.5`, `5` [_(Dockerfile)_]
 * `8-alpine3.13`, `alpine3.13` [_(Dockerfile)_]
 * `7.7-alpine3.13`, `7-alpine3.13` [_(Dockerfile)_]
 * `6.6-alpine3.13`, `6-alpine3.13` [_(Dockerfile)_]
