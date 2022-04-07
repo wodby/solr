@@ -13,6 +13,12 @@ on:
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  SOLR811: '8.11.1'
+  SOLR77: '7.7.3'
+  SOLR76: '7.6.0'
+  SOLR75: '7.5.0'
+  SOLR66: '6.6.6'
+  SOLR55: '5.5.5'
 
 jobs:
   solr-8:
@@ -21,45 +27,93 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: '8.11.1'
-        tags: 8,8,latest
+        version: ${{ env.SOLR811 }}
+        tags: 8-alpine3.15,8-alpine,8,alpine3.15,alpine,latest
   solr-77:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 7.7.3
-        tags: 7.7,7
+        version: ${{ env.SOLR77 }}
+        tags: 7.7-alpine3.15,7-alpine3.15,7.7-alpine,7-alpine,7.7,7
   solr-76:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 7.6.0
-        tags: 7.6
+        version: ${{ env.SOLR76 }}
+        tags: 7.6-alpine3.15,7.6-alpine,7.6
   solr-75:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 7.5.0
-        tags: 7.5
+        version: ${{ env.SOLR75 }}
+        tags: 7.5-alpine3.15,7.5-alpine,7.5
   solr-66:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 6.6.6
-        tags: 6.6,6
+        version: ${{ env.SOLR66 }}
+        tags: 6.6-alpine3.15,6-alpine3.15,6.6-alpine,6-alpine,6.6,6
   solr-55:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions
       with:
-        version: 5.5.5
-        tags: 5.5,5
+        version: ${{ env.SOLR55 }}
+        tags: 5.5-alpine3.15,5-alpine3.15,5.5-alpine,5-alpine,5.5,5
+  solr-8-alpine313:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.SOLR811 }}
+        tags: 8-alpine3.13,alpine3.13
+  solr-77-alpine313:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.SOLR77 }}
+        tags: 7.7-alpine3.13,7-alpine3.13
+  solr-76-alpine313:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.SOLR76 }}
+        tags: 7.6-alpine3.13
+  solr-75-alpine313:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.SOLR75 }}
+        tags: 7.5-alpine3.13
+  solr-66-alpine313:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.SOLR66 }}
+        tags: 6.6-alpine3.13,6-alpine3.13
+  solr-55-alpine313:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions
+      with:
+        version: ${{ env.SOLR55 }}
+        tags: 5.5-alpine3.13,5-alpine3.13
