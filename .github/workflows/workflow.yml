@@ -26,7 +26,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: ${{ env.SOLR8 }}
-        tags: 8-alpine3.15,8,alpine3.15,latest
+        tags: 8,latest
         alpine_ver: 3.15
   solr-77:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: ${{ env.SOLR77 }}
-        tags: 7.7-alpine3.15,7-alpine3.15,7.7,7
+        tags: 7.7,7
         alpine_ver: 3.15
   solr-66:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: ${{ env.SOLR66 }}
-        tags: 6.6-alpine3.15,6-alpine3.15,6.6,6
+        tags: 6.6,6
         alpine_ver: 3.15
   solr-55:
     runs-on: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
     - uses: ./.github/actions
       with:
         version: ${{ env.SOLR55 }}
-        tags: 5.5-alpine3.15,5-alpine3.15,5.5,5
+        tags: 5.5,5
         alpine_ver: 3.15
   solr-8-alpine313:
     runs-on: ubuntu-latest
