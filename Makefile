@@ -20,7 +20,7 @@ endif
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) --build-arg SOLR_VER=$(SOLR_VER) --buiild-arg ALPINE_VER=$(ALPINE_VER) ./
+	docker build -t $(REPO):$(TAG) --build-arg SOLR_VER=$(SOLR_VER) --build-arg ALPINE_VER=$(ALPINE_VER) ./
 
 test:
 	cd ./tests && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh
