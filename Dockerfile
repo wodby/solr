@@ -1,7 +1,6 @@
 ARG SOLR_VER
-ARG ALPINE_VER
 
-FROM wodby/base-solr:${SOLR_VER}-alpine${ALPINE_VER}
+FROM wodby/base-solr:${SOLR_VER}
 
 ARG SOLR_VER
 

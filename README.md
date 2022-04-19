@@ -21,10 +21,6 @@ Supported tags and respective `Dockerfile` links:
 * `7.7`, `7` [_(Dockerfile)_]
 * `6.6`, `6` [_(Dockerfile)_]
 * `5.5`, `5` [_(Dockerfile)_]
-* `8-alpine3.13`, `alpine3.13` [_(Dockerfile)_]
-* `7.7-alpine3.13`, `7-alpine3.13` [_(Dockerfile)_]
-* `6.6-alpine3.13`, `6-alpine3.13` [_(Dockerfile)_]
-* `5.5-alpine3.13`, `5-alpine3.13` [_(Dockerfile)_]
 
 ## Environment Variables
 

@@ -3,8 +3,7 @@
 SOLR_VER ?= 8.11.1
 SOLR_MINOR_VER=$(shell echo "${SOLR_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
-ALPINE_VER ?= 3.15
-TAG ?= $(SOLR_MINOR_VER)-alpine$(ALPINE_VER)
+TAG ?= $(SOLR_MINOR_VER)
 
 REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
@@ -20,7 +19,7 @@ endif
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) --build-arg SOLR_VER=$(SOLR_VER) --build-arg ALPINE_VER=$(ALPINE_VER) ./
+	docker build -t $(REPO):$(TAG) --build-arg SOLR_VER=$(SOLR_VER) ./
 
 test:
 	cd ./tests && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh

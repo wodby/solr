@@ -7,9 +7,6 @@ inputs:
   tags:
     description: image tags
     required: true
-  alpine_ver:
-    description: alpine version
-    required: true
 runs:
   using: "composite"
   steps:
@@ -17,7 +14,6 @@ runs:
     env:
       SOLR_VER: ${{ inputs.version }}
       TAGS: ${{ inputs.tags }}
-      ALPINE_VER: ${{ inputs.alpine_ver }}
     run: |
       set -e
       make
