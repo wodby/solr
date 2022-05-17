@@ -11,6 +11,7 @@ host=$1
 if [[ -n "${ZK_HOST}" ]]; then
   solr zk cp file:/security.json zk:/security.json
   if [[ -n "${SOLR_CLOUD_PASSWORD}" ]]; then
+    sleep 5
     make update-password host="${host}" username=solr password=SolrRocks new_password="${SOLR_CLOUD_PASSWORD}" \
       -f /usr/local/bin/actions.mk
   fi
