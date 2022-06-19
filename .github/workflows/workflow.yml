@@ -13,7 +13,7 @@ on:
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  SOLR8: '8.11.1'
+  SOLR8: '8.11.2'
   SOLR77: '7.7.3'
   SOLR66: '6.6.6'
   SOLR55: '5.5.5'
