@@ -9,18 +9,18 @@ fi
 host=$1
 
 if [[ -n "${ZK_HOST}" ]]; then
-  solr zk cp file:/security.json zk:/security.json
-  if [[ -n "${SOLR_CLOUD_PASSWORD}" ]]; then
-    sleep 5
-    make update-password host="${host}" username=solr password=SolrRocks new_password="${SOLR_CLOUD_PASSWORD}" \
-      -f /usr/local/bin/actions.mk
-  fi
   # Create default collection if there are no collections.
   if curl -s "http://${host}:8983/solr/admin/collections?action=LIST" | grep -q '"collections":\[\]'; then
       echo "No collections found, creating a default collection"
       IFS=',' read -ra num_shards <<< "$ZK_HOST"
       make create-collection collection="default" host="${host}" num_shards="${#num_shards[@]}" config="_default" \
         -f /usr/local/bin/actions.mk
+  fi
+  solr zk cp file:/security.json zk:/security.json
+  if [[ -n "${SOLR_CLOUD_PASSWORD}" ]]; then
+    sleep 5
+    make update-password host="${host}" username=solr password=SolrRocks new_password="${SOLR_CLOUD_PASSWORD}" \
+      -f /usr/local/bin/actions.mk
   fi
 else
   # Create default core if there are no cores.
