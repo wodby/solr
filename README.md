@@ -31,6 +31,10 @@ Supported tags and respective `Dockerfile` links:
 | `ZK_HOST`                 |               |                                 |
 | `SOLR_CLOUD_PASSWORD`     |               |                                 |
 
+## Data persistence
+
+To persist data, mount a volume at `/opt/solr/server/solr`. The entrypoint script will copy required files into place and ensure ownership by the `solr` user.
+
 ## Config sets
 
 ### Drupal Search API Solr
@@ -41,7 +45,8 @@ Read [old approach instructions](docs/search_api_solr_old.md)
 
 ## Orchestration actions
 
-Usage:
+Commands from the upstream image for [creating cores](https://github.com/docker-solr/docker-solr#creating-cores) on startup (e.g., `solr-precreate`) are available In addition, various actions are available via `make`:
+
 ```
 make COMMAND [params ...]
 
