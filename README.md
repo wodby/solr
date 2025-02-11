@@ -6,6 +6,8 @@
 
 ## Docker Images
 
+This Solr image designed to be run in Solr Cloud mode only.
+
 ❗️For better reliability we release images with stability tags (`wodby/solr:9-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
 
 - All images based on Alpine Linux
@@ -18,6 +20,10 @@
 Supported tags and respective `Dockerfile` links:
 
 * `9.8.0`, `9.8`, `9`, `latest` [_(Dockerfile)_]
+
+### Supported architectures
+
+All images built for `linux/amd64` and `linux/arm64`
 
 ## Environment Variables
 
