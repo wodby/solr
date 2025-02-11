@@ -8,20 +8,20 @@ TAG ?= $(SOLR_VER_MINOR)
 REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
 
+PLATFORM ?= linux/arm64
+
 ifneq ($(ARCH),)
 	override TAG := $(TAG)-$(ARCH)
 endif
 
-.PHONY: build test push shell run start stop logs clean release
+.PHONY: test push shell run start stop logs clean release
 
-default: build
-
-build:
-	docker build -t $(REPO):$(TAG) --build-arg SOLR_VERSION=$(SOLR_VER) ./
+default: buildx-build
 
 buildx-build:
 	docker buildx build --platform $(PLATFORM) -t $(REPO):$(TAG) \
 	    --build-arg SOLR_VERSION=$(SOLR_VER) \
+	    --load \
 		./
 .PHONY: buildx-build
 
