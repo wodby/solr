@@ -3,51 +3,59 @@ name: Build docker image
 on:
   push:
     branches:
-    - master
+      - master
 
     tags:
-    - '*'
-
-  pull_request:
+      - '*'
 
 env:
+  BASE_IMAGE_STABILITY_TAG: 2.16.3
+  SOLR9: '9.8.0'
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  SOLR8: '8.11.2'
-  SOLR77: '7.7.3'
-  SOLR66: '6.6.6'
-  SOLR55: '5.5.5'
 
 jobs:
-  solr-8:
-    runs-on: ubuntu-latest
+  solr9-build:
+    strategy:
+      matrix:
+        platform:
+          - linux/amd64
+          - linux/arm64
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-24.04
+            arch: amd64
+          - platform: linux/arm64
+            runner: ubuntu-24.04-arm
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
     steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.SOLR8 }}
-        tags: 8,latest
-  solr-77:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - uses: docker/setup-buildx-action@v3
+      - name: build and push
+        env:
+          SOLR_VER: ${{ env.SOLR9 }}
+          ARCH: ${{ matrix.arch }}
+          PLATFORM: ${{ matrix.platform }}
+        run: |
+          make buildx-build
+          make buildx-push
+  solr9-push:
     runs-on: ubuntu-latest
+    needs:
+      - solr9-build
     steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.SOLR77 }}
-        tags: 7.7,7
-  solr-66:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.SOLR66 }}
-        tags: 6.6,6
-  solr-55:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.SOLR55 }}
-        tags: 5.5,5
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - uses: ./.github/actions
+        with:
+          version: ${{ env.SOLR9 }}
+          latest: true
+          latest_major: true

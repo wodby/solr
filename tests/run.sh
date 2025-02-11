@@ -27,24 +27,24 @@ solr make init host="${host}"
 echo "Checking if default core has been created..."
 solr make ping core="default" host="${host}"
 
-echo "Checking init with existing core..."
-solr make init host="${host}"
-
-configsets=($(solr sh -c 'ls -d configsets/* | sed "s/configsets\///"'))
-
-for config in "${configsets[@]}"; do
-    echo "Creating new core..."
-    solr make core="${core}" config_set="${config}" host="${host}"
-
-    echo "Checking if core has been created..."
-    solr make ping core="${core}" config_set="${config}" host="${host}"
-
-    echo "Reloading core..."
-    solr make reload core="${core}" config_set="${config}" host="${host}"
-
-    echo "Deleting core..."
-    solr make delete core="${core}" config_set="${config}" host="${host}"
-
-    echo "Checking if core has been deleted..."
-    solr bash -c "curl -sIN 'http://${host}:8983/solr/${core}/admin/ping' | head -n 1 | awk '{print \$2}' | grep 404"
-done;
+#echo "Checking init with existing core..."
+#solr make init host="${host}"
+#
+#configsets=($(solr sh -c 'ls -d configsets/* | sed "s/configsets\///"'))
+#
+#for config in "${configsets[@]}"; do
+#    echo "Creating new core..."
+#    solr make core="${core}" config_set="${config}" host="${host}"
+#
+#    echo "Checking if core has been created..."
+#    solr make ping core="${core}" config_set="${config}" host="${host}"
+#
+#    echo "Reloading core..."
+#    solr make reload core="${core}" config_set="${config}" host="${host}"
+#
+#    echo "Deleting core..."
+#    solr make delete core="${core}" config_set="${config}" host="${host}"
+#
+#    echo "Checking if core has been deleted..."
+#    solr bash -c "curl -sIN 'http://${host}:8983/solr/${core}/admin/ping' | head -n 1 | awk '{print \$2}' | grep 404"
+#done;

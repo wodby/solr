@@ -6,10 +6,10 @@
 
 ## Docker Images
 
-❗️For better reliability we release images with stability tags (`wodby/solr:8-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
+❗️For better reliability we release images with stability tags (`wodby/solr:9-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
 
 - All images based on Alpine Linux
-- Base image: [wodby/base-solr](https://github.com/wodby/base-solr)
+- Base image: [eclipse-temurin](https://github.com/adoptium/containers)
 - [GitHub actions builds](https://github.com/wodby/solr/actions) 
 - [Docker Hub](https://hub.docker.com/r/wodby/solr)
 
@@ -17,27 +17,15 @@
 
 Supported tags and respective `Dockerfile` links:
 
-* `8`, `latest` [_(Dockerfile)_]
-* `7.7`, `7` [_(Dockerfile)_]
-* `6.6`, `6` [_(Dockerfile)_]
-* `5.5`, `5` [_(Dockerfile)_]
+* `9.8.0`, `9.8`, `9`, `latest` [_(Dockerfile)_]
 
 ## Environment Variables
 
 | Variable                  | Default Value | Description                     |
 |---------------------------|---------------|---------------------------------|
 | `SOLR_HEAP`               | `1024m `      |                                 |
-| `SOLR_DEFAULT_CONFIG_SET` |               | See [config sets](#config-sets) |
 | `ZK_HOST`                 |               |                                 |
 | `SOLR_CLOUD_PASSWORD`     |               |                                 |
-
-## Config sets
-
-### Drupal Search API Solr
-
-We recommend running Solr with Zookeeper (Solr Cloud mode) and uploading config sets directly from the Search API Solr Admin UI.
-
-Read [old approach instructions](docs/search_api_solr_old.md)
 
 ## Orchestration actions
 

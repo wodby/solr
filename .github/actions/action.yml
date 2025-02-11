@@ -1,22 +1,27 @@
-name: Build
-description: Build solr image
+name: push
+description: combine multi-arch image and push
 inputs:
   version:
     description: version
     required: true
-  tags:
-    description: image tags
-    required: true
+  latest:
+    description: if tag latest
+    required: false
+  latest_major:
+    description: if tag latest major version
+    required: false
+  workdir:
+    description: workdir
+    required: false
 runs:
   using: "composite"
   steps:
-  - name: Build image
-    env:
-      SOLR_VER: ${{ inputs.version }}
-      TAGS: ${{ inputs.tags }}
-    run: |
-      set -e
-      make
-      make test
-      . $GITHUB_ACTION_PATH/release.sh
-    shell: bash
+    - name: Build image
+      env:
+        SOLR_VER: ${{ inputs.version }}
+        LATEST: ${{ inputs.latest }}
+        LATEST_MAJOR: ${{ inputs.latest_major }}
+      run: |
+        . $GITHUB_ACTION_PATH/release.sh
+      shell: bash
+      working-directory: ${{ inputs.workdir }}

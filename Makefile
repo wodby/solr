@@ -1,9 +1,9 @@
 -include env_make
 
-SOLR_VER ?= 8.11.2
-SOLR_MINOR_VER=$(shell echo "${SOLR_VER}" | grep -oE '^[0-9]+\.[0-9]+')
+SOLR_VER ?= 9.8.0
+SOLR_VER_MINOR=$(shell echo "${SOLR_VER}" | grep -oE '^[0-9]+\.[0-9]+')
 
-TAG ?= $(SOLR_MINOR_VER)
+TAG ?= $(SOLR_VER_MINOR)
 
 REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
@@ -19,9 +19,27 @@ endif
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) --build-arg SOLR_VER=$(SOLR_VER) ./
+	docker build -t $(REPO):$(TAG) --build-arg SOLR_VERSION=$(SOLR_VER) ./
+
+buildx-build:
+	docker buildx build --platform $(PLATFORM) -t $(REPO):$(TAG) \
+	    --build-arg SOLR_VERSION=$(SOLR_VER) \
+		./
+.PHONY: buildx-build
+
+buildx-push:
+	docker buildx build --push --platform $(PLATFORM) -t $(REPO):$(TAG) \
+	    --build-arg SOLR_VERSION=$(SOLR_VER) \
+	    ./
+
+buildx-imagetools-create:
+	docker buildx imagetools create -t $(REPO):$(TAG) \
+				  $(REPO):$(SOLR_VER_MINOR)-amd64 \
+				  $(REPO):$(SOLR_VER_MINOR)-arm64
+.PHONY: buildx-imagetools-create 
 
 test:
+	#echo "123"
 	cd ./tests && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh
 
 push:
