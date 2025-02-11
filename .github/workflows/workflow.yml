@@ -43,6 +43,7 @@ jobs:
           PLATFORM: ${{ matrix.platform }}
         run: |
           make buildx-build
+          make test
           make buildx-push
   solr9-push:
     runs-on: ubuntu-latest

@@ -8,10 +8,8 @@ TAG ?= $(SOLR_VER_MINOR)
 REPO = wodby/solr
 NAME = solr-$(SOLR_VER)
 
-ifneq ($(STABILITY_TAG),)
-    ifneq ($(TAG),latest)
-        override TAG := $(TAG)-$(STABILITY_TAG)
-    endif
+ifneq ($(ARCH),)
+	override TAG := $(TAG)-$(ARCH)
 endif
 
 .PHONY: build test push shell run start stop logs clean release
