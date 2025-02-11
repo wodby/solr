@@ -37,8 +37,7 @@ buildx-imagetools-create:
 .PHONY: buildx-imagetools-create 
 
 test:
-	#echo "123"
-	cd ./tests && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh
+	cd ./tests && IMAGE=$(REPO):$(TAG) ./run.sh
 
 push:
 	docker push $(REPO):$(TAG)
@@ -60,5 +59,6 @@ logs:
 
 clean:
 	-docker rm -f $(NAME)
+	-IMAGE=$(REPO):$(TAG) docker compose -f tests/compose.yml down -v
 
 release: build push

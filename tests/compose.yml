@@ -1,0 +1,12 @@
+services:
+  solr:
+    image: $IMAGE
+    environment:
+      ZK_HOST: zookeeper:2181
+      SOLR_CLOUD_PASSWORD: test123
+      DEBUG: 1
+    depends_on:
+      - zookeeper
+
+  zookeeper:
+    image: zookeeper
