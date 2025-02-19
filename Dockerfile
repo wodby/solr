@@ -80,8 +80,6 @@ FROM base
 ARG SOLR_VERSION
 
 ENV SOLR_HEAP="1024m" \
-    SOLR_HOME=/opt/solr/server/solr \
-    SOLR_VER="${SOLR_VERSION}" \
     TINI='no'
 
 USER root
@@ -91,11 +89,12 @@ RUN set -ex; \
     apk add --no-cache \
         bash \
         curl \
+        jq \
         make \
         procps-ng \
         sudo; \
     \
-    chown -R solr:solr /etc/default/; \
+    chown -R solr:solr /etc/default/ /opt/solr-${SOLR_VERSION}/server/solr; \
     \
     rm -rf /var/cache/apk/*
 
