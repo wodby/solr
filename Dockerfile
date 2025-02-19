@@ -90,36 +90,13 @@ RUN set -ex; \
     \
     apk add --no-cache \
         bash \
-        curl \
-        grep \
         make \
         procps-ng \
         sudo; \
     \
-    # 8.x version has a symlink and wrong permissions.
-    if [[ -d "/opt/solr-${SOLR_VER}" ]]; then \
-        rm -rf /opt/solr; \
-        mv "/opt/solr-${SOLR_VER}" /opt/solr; \
-        chown -R solr:solr /opt/solr /etc/default/; \
-        cd /opt/solr; \
-    fi; \
-    echo "chown solr:solr /opt/solr/server/solr" > /usr/local/bin/init_volumes; \
-    chmod +x /usr/local/bin/init_volumes; \
-    echo 'solr ALL=(root) NOPASSWD:SETENV: /usr/local/bin/init_volumes' > /etc/sudoers.d/solr; \
+    chown -R solr:solr /etc/default/; \
     \
-    mkdir -p /opt/docker-solr/configsets; \
-    # Move out from volume to always keep them inside of the image.
-    mv /opt/solr/server/solr/configsets/* /opt/docker-solr/configsets/; \
-    mv /opt/solr/server/solr/solr.xml /opt/docker-solr/solr.xml; \
-    if [[ -d /tmp/configsets/"${SOLR_VER:0:1}"/ ]]; then \
-        cp -R /tmp/configsets/"${SOLR_VER:0:1}"/* /opt/docker-solr/configsets/; \
-    fi; \
-    chown -R solr:solr /opt/docker-solr/configsets; \
-    \
-    rm -rf \
-        /tmp/configsets \
-        /opt/solr/server/solr/mycores \
-        /var/cache/apk/*
+    rm -rf /var/cache/apk/*
 
 COPY bin /usr/local/bin
 COPY entrypoint.sh /
