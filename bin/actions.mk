@@ -76,7 +76,7 @@ add-admin-user:
 		-H 'Content-type:application/json' -d '{"set-user-role":{"$(user)": ["admin"]}}' | grep -vq 'errorMessages'
 
 check-ready:
-	wait_solr $(host) $(max_try) $(wait_seconds) $(delay_seconds)
+	wait-for-solr.sh --solr-url http://$(host):8983 --max-attempts $(max_try) --wait-seconds $(wait_seconds)
 
 check-live:
 	@echo "OK"

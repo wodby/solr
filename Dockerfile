@@ -90,6 +90,7 @@ RUN set -ex; \
     \
     apk add --no-cache \
         bash \
+        curl \
         make \
         procps-ng \
         sudo; \
@@ -105,4 +106,4 @@ COPY security.json /
 USER solr
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["solr-foreground"]
+CMD ["solr-foreground", "-c"]
