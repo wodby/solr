@@ -6,8 +6,11 @@
   },
   "authorization":{
     "class":"solr.RuleBasedAuthorizationPlugin",
-    "permissions":[{"name":"security-edit",
-      "role":"admin"}],
+    "permissions":[
+      { "name": "security-edit", "role": "admin" },
+      { "name": "security-read", "role": "admin" },
+      { "name": "all", "role": "admin" }
+    ],
     "user-role":{"solr":"admin"}
   }
 }
