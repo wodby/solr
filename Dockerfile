@@ -78,6 +78,7 @@ USER $SOLR_UID
 FROM base
 
 ARG SOLR_VERSION
+ARG TARGETPLATFORM
 
 ENV SOLR_HEAP="1024m" \
     TINI='no'
@@ -96,11 +97,16 @@ RUN set -ex; \
     \
     chown -R solr:solr /etc/default/ /opt/solr-${SOLR_VERSION}/server/solr; \
     \
+    dockerplatform=${TARGETPLATFORM:-linux\/amd64};\
+    gotpl_url="https://github.com/wodby/gotpl/releases/latest/download/gotpl-${dockerplatform/\//-}.tar.gz"; \
+    wget -qO- "${gotpl_url}" | tar xz --no-same-owner -C /usr/local/bin; \
+    \
     rm -rf /var/cache/apk/*
 
 COPY bin /usr/local/bin
 COPY entrypoint.sh /
 COPY security.json /
+COPY templates /etc/gotpl
 
 USER solr
 

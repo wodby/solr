@@ -6,9 +6,9 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
-migrate
+gotpl /etc/gotpl/solr.in.sh.tmpl > /etc/default/solr.in.sh
 
-sed -E -i 's@^#SOLR_HEAP=".*"@'"SOLR_HEAP=${SOLR_HEAP}"'@' /etc/default/solr.in.sh
+migrate
 
 if [[ "${1}" == 'make' ]]; then
     exec "$@" -f /usr/local/bin/actions.mk
