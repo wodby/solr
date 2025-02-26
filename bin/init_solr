@@ -16,7 +16,7 @@ if [[ -n "${ZK_HOST}" ]]; then
       make create-collection collection="default" host="${host}" num_shards="${#num_shards[@]}" config="_default" \
         -f /usr/local/bin/actions.mk
   fi
-  solr zk cp file:/security.json zk:/security.json
+  solr zk cp file:/security.json zk:/security.json --solr-url "http://${host}:8983" --zk-host "${ZK_HOST}"
   if [[ -n "${SOLR_CLOUD_PASSWORD}" ]]; then
     sleep 5
     make update-password host="${host}" username=solr password=SolrRocks new_password="${SOLR_CLOUD_PASSWORD}" \
