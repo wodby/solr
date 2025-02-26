@@ -95,6 +95,10 @@ RUN set -ex; \
         procps-ng \
         sudo; \
     \
+    echo "chown solr:solr /var/solr" > /usr/local/bin/init_volumes; \
+    chmod +x /usr/local/bin/init_volumes; \
+    echo 'solr ALL=(root) NOPASSWD:SETENV: /usr/local/bin/init_volumes' > /etc/sudoers.d/solr; \
+    \
     chown -R solr:solr /etc/default/ /opt/solr-${SOLR_VERSION}/server/solr; \
     \
     dockerplatform=${TARGETPLATFORM:-linux\/amd64};\

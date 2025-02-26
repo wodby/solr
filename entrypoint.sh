@@ -6,6 +6,8 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
+sudo init_volumes
+
 gotpl /etc/gotpl/solr.in.sh.tmpl > /etc/default/solr.in.sh
 
 migrate
