@@ -16,7 +16,13 @@ endif
 
 .PHONY: test push shell run start stop logs clean release
 
-default: buildx-build
+default: build
+
+build:
+	docker build -t $(REPO):$(TAG) \
+	    --build-arg SOLR_VERSION=$(SOLR_VER) \
+		./
+.PHONY: build
 
 buildx-build:
 	docker buildx build --platform $(PLATFORM) -t $(REPO):$(TAG) \
