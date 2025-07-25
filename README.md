@@ -19,7 +19,7 @@ This Solr image designed to be run in Solr Cloud mode only.
 
 Supported tags and respective `Dockerfile` links:
 
-* `9.8.0`, `9.8`, `9`, `latest` [_(Dockerfile)_]
+* `9.9`, `9.9`, `9`, `latest` [_(Dockerfile)_]
 
 ### Supported architectures
 
