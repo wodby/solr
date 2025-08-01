@@ -6,7 +6,7 @@
 
 ## Docker Images
 
-This Solr image designed to be run in Solr Cloud mode only.
+This Solr image runs in Solr Cloud mode by default, set `SOLR_STANDALONE=1` to run in standalone.
 
 ❗️For better reliability we release images with stability tags (`wodby/solr:9-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
 
@@ -27,11 +27,12 @@ All images built for `linux/amd64` and `linux/arm64`
 
 ## Environment Variables
 
-| Variable                  | Default Value | Description                     |
-|---------------------------|---------------|---------------------------------|
-| `SOLR_HEAP`               | `1024m `      |                                 |
-| `ZK_HOST`                 |               |                                 |
-| `SOLR_CLOUD_PASSWORD`     |               |                                 |
+| Variable              | Default Value | Description                                          |
+|-----------------------|---------------|------------------------------------------------------|
+| `SOLR_HEAP`           | `1024m `      |                                                      |
+| `ZK_HOST`             |               |                                                      |
+| `SOLR_CLOUD_PASSWORD` |               |                                                      |
+| `SOLR_STANDALONE`     |               | Set to any non-empty value to run in standalone mode |
 
 ## Orchestration actions
 

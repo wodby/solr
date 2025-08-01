@@ -1,8 +1,10 @@
 SOLR_HEAP={{ getenv "SOLR_HEAP" "1024m" }}
 
+{{- if not (getenv "SOLR_STANDALONE") }}
 SOLR_ZK_CREDS_AND_ACLS="-DzkACLProvider=org.apache.solr.common.cloud.DigestZkACLProvider \
 -DzkCredentialsProvider=org.apache.solr.common.cloud.DigestZkCredentialsProvider \
 -DzkCredentialsInjector=org.apache.solr.common.cloud.VMParamsZkCredentialsInjector \
 -DzkDigestUsername=solr -DzkDigestPassword={{ getenv "SOLR_CLOUD_PASSWORD" "SolrRocks" }}"
 
 SOLR_OPTS="$SOLR_OPTS $SOLR_ZK_CREDS_AND_ACLS"
+{{- end }}
