@@ -14,9 +14,10 @@ migrate
 
 if [[ "${1}" == 'make' ]]; then
     exec "$@" -f /usr/local/bin/actions.mk
-else
-    if [[ "${@}" == "solr-foreground" && "${SOLR_STANDALONE}" ]]; then
-        exec docker-entrypoint.sh solr-foreground
-    fi
-    exec docker-entrypoint.sh "$@"
 fi
+
+if [[ "${@}" == "solr-foreground -c" && "${SOLR_STANDALONE}" ]]; then
+    exec docker-entrypoint.sh solr-foreground
+fi
+
+exec docker-entrypoint.sh "$@"
