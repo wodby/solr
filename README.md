@@ -66,3 +66,4 @@ Deploy Solr to your server via ![Wodby](https://www.google.com/s2/favicons?domai
 
 * [Generic Solr](https://wodby.com/stacks/solr)
 * [Solr for Drupal](https://wodby.com/stacks/solr-drupal)
+
