@@ -19,7 +19,7 @@ This Solr image runs in Solr Cloud mode by default, set `SOLR_STANDALONE=1` to r
 
 Supported tags and respective `Dockerfile` links:
 
-* `9.9.0`, `9.9`, `9`, `latest` [_(Dockerfile)_]
+* `9.10`, `9.10`, `9`, `latest` [_(Dockerfile)_]
 
 ### Supported architectures
 
