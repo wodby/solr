@@ -11,12 +11,15 @@ host ?= localhost
 max_try ?= 1
 wait_seconds ?= 1
 delay_seconds ?= 1
+solr_user ?= solr
+solr_password ?= $(if $(SOLR_CLOUD_PASSWORD),$(SOLR_CLOUD_PASSWORD),SolrRocks)
+curl_auth = --user "$(solr_user):$(solr_password)"
 
 ifeq ($(config_set),)
     ifneq ($(SOLR_DEFAULT_CONFIG_SET),)
 		config_set ?= $(SOLR_DEFAULT_CONFIG_SET)
     # New versions of solr have a different name of the default config set
-    else ifneq ("$(wildcard /opt/docker-solr/configsets/_default)","")
+    else ifneq ("$(wildcard /opt/solr/server/solr/configsets/_default)","")
         config_set ?= _default
     else
         config_set ?= basic_configs
@@ -33,26 +36,37 @@ create:
 	$(call check_defined, core)
 	echo "Creating core $(core) from config set $(config_set)"
 	$(eval instance_dir ?= $(core))
-	curl -sIN "http://$(host):8983/solr/admin/cores?action=CREATE&name=$(core)&configSet=$(config_set)&instanceDir=$(instance_dir)" \
-		| head -n 1 | awk '{print $$2}' | grep -q 200
+	@curl --fail-with-body --silent --show-error $(curl_auth) --get "http://$(host):8983/solr/admin/cores" \
+		--data-urlencode "action=CREATE" \
+		--data-urlencode "name=$(core)" \
+		--data-urlencode "configSet=$(config_set)" \
+		--data-urlencode "instanceDir=$(instance_dir)"
 
 create-collection:
 	$(call check_defined, collection, num_shards, config)
 	echo "Creating collection $(collection) with default config"
-	curl -sIN "http://$(host):8983/solr/admin/collections?action=CREATE&name=$(collection)&numShards=$(num_shards)&collection.configName=$(config)" | head -n 1 | awk '{print $$2}' | grep -q 200
+	@curl --fail-with-body --silent --show-error $(curl_auth) \
+		--request POST "http://$(host):8983/api/collections" \
+		--header "Content-Type: application/json" \
+		--data '{"name":"$(collection)","numShards":$(num_shards),"config":"$(config)"}'
 
 delete:
 	echo "Deleting core $(core)"
 	$(call check_defined, core)
-	curl -sIN "http://$(host):8983/solr/admin/cores?action=UNLOAD&core=$(core)&deleteIndex=true&deleteDataDir=true&deleteInstanceDir=true" \
-		| head -n 1 | awk '{print $$2}' | grep -q 200
+	@curl --fail-with-body --silent --show-error $(curl_auth) --get "http://$(host):8983/solr/admin/cores" \
+		--data-urlencode "action=UNLOAD" \
+		--data-urlencode "core=$(core)" \
+		--data-urlencode "deleteIndex=true" \
+		--data-urlencode "deleteDataDir=true" \
+		--data-urlencode "deleteInstanceDir=true"
 	rm -rf "/opt/solr/server/solr/$(core)"
 
 reload:
 	$(call check_defined, core)
 	echo "Reloading core $(core)"
-	curl -sIN "http://$(host):8983/solr/admin/cores?action=RELOAD&core=$(core)" \
-		| head -n 1 | awk '{print $$2}' | grep -q 200
+	@curl --fail-with-body --silent --show-error $(curl_auth) --get "http://$(host):8983/solr/admin/cores" \
+		--data-urlencode "action=RELOAD" \
+		--data-urlencode "core=$(core)"
 
 upgrade:
 	upgrade_core $(host)
@@ -60,8 +74,8 @@ upgrade:
 ping:
 	$(call check_defined, core)
 	echo "Pinging core $(core)"
-	curl -sIN "http://$(host):8983/solr/$(core)/admin/ping" \
-		| head -n 1 | awk '{print $$2}' | grep -q 200
+	@curl --fail-with-body --silent --show-error $(curl_auth) \
+		"http://$(host):8983/solr/$(core)/admin/ping"
 
 update-password:
 	$(call check_defined, username, password, new_password)

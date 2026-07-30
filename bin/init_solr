@@ -9,17 +9,59 @@ fi
 host=$1
 
 if [[ -n "${ZK_HOST}" ]]; then
-  # Create default collection if there are no collections.
-  if [[ $(curl -s "http://${host}:8983/solr/admin/collections?action=LIST" | jq '.collections | length') == 0 ]]; then
-      echo "No collections found, creating a default collection"
-      IFS=',' read -ra num_shards <<< "$ZK_HOST"
-      make create-collection collection="default" host="${host}" num_shards="${#num_shards[@]}" config="_default" \
-        -f /usr/local/bin/actions.mk
+  solr_url="http://${host}:8983"
+  configured_password="${SOLR_CLOUD_PASSWORD:-SolrRocks}"
+  bootstrap_password="SolrRocks"
+  auth_args=()
+  password_update_required=
+
+  # New clusters accept the unauthenticated request. Existing clusters require either the configured
+  # password or, after an interrupted first initialization, the image's bootstrap password.
+  if collections=$(curl --fail --silent "${solr_url}/solr/admin/collections?action=LIST"); then
+    :
+  elif collections=$(curl --fail --silent --user "solr:${configured_password}" \
+    "${solr_url}/solr/admin/collections?action=LIST"); then
+    auth_args=(--user "solr:${configured_password}")
+  elif [[ "${configured_password}" != "${bootstrap_password}" ]] &&
+    collections=$(curl --fail --silent --show-error --user "solr:${bootstrap_password}" \
+      "${solr_url}/solr/admin/collections?action=LIST"); then
+    auth_args=(--user "solr:${bootstrap_password}")
+    password_update_required=1
+  else
+    echo "Unable to list Solr collections with anonymous, configured, or bootstrap credentials" >&2
+    exit 1
   fi
-  solr zk cp file:/security.json zk:/security.json --solr-url "http://${host}:8983" --zk-host "${ZK_HOST}"
-  if [[ -n "${SOLR_CLOUD_PASSWORD}" ]]; then
+
+  if ! collection_count=$(jq --exit-status \
+    'if (.collections | type) == "array" then .collections | length else error("missing collections array") end' \
+    <<< "${collections}"); then
+    echo "Solr returned an invalid collections response" >&2
+    exit 1
+  fi
+
+  # Create default collection if there are no collections.
+  if [[ "${collection_count}" == 0 ]]; then
+    echo "No collections found, creating a default collection"
+    IFS=',' read -ra num_shards <<< "$ZK_HOST"
+    curl --fail-with-body --silent --show-error "${auth_args[@]}" \
+      --request POST "${solr_url}/api/collections" \
+      --header "Content-Type: application/json" \
+      --data "{\"name\":\"default\",\"numShards\":${#num_shards[@]},\"config\":\"_default\"}"
+  fi
+
+  # Install security only on first initialization. Replacing security.json on every deployment
+  # temporarily restores the public bootstrap password and breaks idempotent initialization.
+  if [[ ${#auth_args[@]} == 0 ]]; then
+    solr zk cp file:/security.json zk:/security.json --solr-url "${solr_url}" --zk-host "${ZK_HOST}"
+    if [[ -n "${SOLR_CLOUD_PASSWORD}" ]]; then
+      password_update_required=1
+    fi
+  fi
+
+  if [[ -n "${password_update_required}" ]]; then
     sleep 5
-    make update-password host="${host}" username=solr password=SolrRocks new_password="${SOLR_CLOUD_PASSWORD}" \
+    make update-password host="${host}" username=solr password="${bootstrap_password}" \
+      new_password="${configured_password}" \
       -f /usr/local/bin/actions.mk
   fi
 else

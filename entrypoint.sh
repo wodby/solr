@@ -13,6 +13,13 @@ gotpl /etc/gotpl/solr.in.sh.tmpl > /etc/default/solr.in.sh
 migrate
 
 if [[ "${1}" == 'make' ]]; then
+    for arg in "$@"; do
+        case "${arg}" in
+            -f|-f*|--file|--file=*|--makefile|--makefile=*)
+                exec "$@"
+                ;;
+        esac
+    done
     exec "$@" -f /usr/local/bin/actions.mk
 fi
 
