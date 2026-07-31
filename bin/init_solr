@@ -52,7 +52,7 @@ if [[ -n "${ZK_HOST}" ]]; then
   # Install security only on first initialization. Replacing security.json on every deployment
   # temporarily restores the public bootstrap password and breaks idempotent initialization.
   if [[ ${#auth_args[@]} == 0 ]]; then
-    solr zk cp file:/security.json zk:/security.json --solr-url "${solr_url}" --zk-host "${ZK_HOST}"
+    solr zk cp file:/security.json zk:/security.json --zk-host "${ZK_HOST}"
     if [[ -n "${SOLR_CLOUD_PASSWORD}" ]]; then
       password_update_required=1
     fi

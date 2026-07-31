@@ -11,8 +11,50 @@ on:
 env:
   BASE_IMAGE_STABILITY_TAG: 2.16.3
   SOLR9: '9.10.1'
+  SOLR10: '10.0.0'
 
 jobs:
+  solr10-build:
+    strategy:
+      matrix:
+        arch:
+          - amd64
+          - arm64
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: build and push
+        env:
+          SOLR_VER: ${{ env.SOLR10 }}
+          ARCH: ${{ matrix.arch }}
+        run: |
+          make
+          make test
+          make push
+  solr10-push:
+    runs-on: ubuntu-latest
+    needs:
+      - solr10-build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - uses: ./.github/actions
+        with:
+          version: ${{ env.SOLR10 }}
+          latest: true
+          latest_major: true
   solr9-build:
     strategy:
       matrix:
@@ -52,5 +94,4 @@ jobs:
       - uses: ./.github/actions
         with:
           version: ${{ env.SOLR9 }}
-          latest: true
           latest_major: true

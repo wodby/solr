@@ -33,7 +33,8 @@ LABEL org.opencontainers.image.title="Apache Solr" \
       org.opencontainers.image.licenses="Apache-2.0"
 
 # Environment variables
-ENV SOLR_USER="solr" \
+ENV SOLR_VERSION="${SOLR_VERSION}" \
+    SOLR_USER="solr" \
     SOLR_UID="8983" \
     SOLR_GROUP="solr" \
     SOLR_GID="8983" \

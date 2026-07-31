@@ -8,7 +8,7 @@
 
 This Solr image runs in Solr Cloud mode by default, set `SOLR_STANDALONE=1` to run in standalone.
 
-❗️For better reliability we release images with stability tags (`wodby/solr:9-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags. 
+❗️For better reliability we release images with stability tags (`wodby/solr:<major>-X.X.X`) which correspond to [git tags](https://github.com/wodby/solr/releases). We strongly recommend using images only with stability tags.
 
 - All images based on Alpine Linux
 - Base image: [eclipse-temurin](https://github.com/adoptium/containers)
@@ -19,7 +19,8 @@ This Solr image runs in Solr Cloud mode by default, set `SOLR_STANDALONE=1` to r
 
 Supported tags and respective `Dockerfile` links:
 
-* `9.10`, `9.10`, `9`, `latest` [_(Dockerfile)_]
+* `10.0`, `10`, `latest` [_(Dockerfile)_]
+* `9.10`, `9` [_(Dockerfile)_]
 
 ### Supported architectures
 
@@ -66,4 +67,3 @@ Deploy Solr to your server via ![Wodby](https://www.google.com/s2/favicons?domai
 
 * [Generic Solr](https://wodby.com/stacks/solr)
 * [Solr for Drupal](https://wodby.com/stacks/solr-drupal)
-
