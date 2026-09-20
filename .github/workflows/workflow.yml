@@ -9,7 +9,7 @@ on:
       - '*'
 
 env:
-  BASE_IMAGE_STABILITY_TAG: 2.16.3
+  BASE_IMAGE_REVISION: 2.16.3
   SOLR9: '9.10.1'
   SOLR10: '10.0.0'
 
