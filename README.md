@@ -26,7 +26,7 @@ Previously published image tags remain available.
 Supported tags and respective `Dockerfile` links:
 
 * `10.0`, `10`, `latest` [_(Dockerfile)_]
-* `9.10`, `9` [_(Dockerfile)_]
+* `9.11`, `9` [_(Dockerfile)_]
 
 ### Supported architectures
 
