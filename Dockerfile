@@ -86,6 +86,9 @@ ENV SOLR_HEAP="1024m" \
 
 USER root
 
+# Refresh inherited security fixes when rebuilding this image.
+RUN apk upgrade --no-cache
+
 RUN set -ex; \
     \
     apk add --no-cache \
